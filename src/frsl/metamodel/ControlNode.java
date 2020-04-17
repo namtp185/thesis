@@ -1,5 +1,11 @@
 package frsl.metamodel;
 
-public class ControlNode extends USLNode {
+import com.google.gson.Gson;
 
+public class ControlNode extends USLNode {
+	
+	public String toString() {
+		return new Gson().toJson(this);
+	}
+	
 }

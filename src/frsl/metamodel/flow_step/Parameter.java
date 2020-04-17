@@ -1,5 +1,11 @@
 package frsl.metamodel.flow_step;
 
-public class Parameter {
+import com.google.gson.Gson;
 
+public class Parameter {
+	
+	public String toString() {
+		return new Gson().toJson(this);
+	}
+	
 }

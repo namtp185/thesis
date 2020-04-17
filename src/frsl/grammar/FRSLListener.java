@@ -188,35 +188,15 @@ public interface FRSLListener extends ParseTreeListener {
 	 */
 	void exitBasicFlows(FRSLParser.BasicFlowsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FRSLParser#specificAlternativeFlows}.
+	 * Enter a parse tree produced by {@link FRSLParser#alternativeFlows}.
 	 * @param ctx the parse tree
 	 */
-	void enterSpecificAlternativeFlows(FRSLParser.SpecificAlternativeFlowsContext ctx);
+	void enterAlternativeFlows(FRSLParser.AlternativeFlowsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FRSLParser#specificAlternativeFlows}.
+	 * Exit a parse tree produced by {@link FRSLParser#alternativeFlows}.
 	 * @param ctx the parse tree
 	 */
-	void exitSpecificAlternativeFlows(FRSLParser.SpecificAlternativeFlowsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FRSLParser#globalAlternativeFlows}.
-	 * @param ctx the parse tree
-	 */
-	void enterGlobalAlternativeFlows(FRSLParser.GlobalAlternativeFlowsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FRSLParser#globalAlternativeFlows}.
-	 * @param ctx the parse tree
-	 */
-	void exitGlobalAlternativeFlows(FRSLParser.GlobalAlternativeFlowsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FRSLParser#boundedAlternativeFlows}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoundedAlternativeFlows(FRSLParser.BoundedAlternativeFlowsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FRSLParser#boundedAlternativeFlows}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoundedAlternativeFlows(FRSLParser.BoundedAlternativeFlowsContext ctx);
+	void exitAlternativeFlows(FRSLParser.AlternativeFlowsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FRSLParser#basicStep}.
 	 * @param ctx the parse tree
@@ -228,35 +208,15 @@ public interface FRSLListener extends ParseTreeListener {
 	 */
 	void exitBasicStep(FRSLParser.BasicStepContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FRSLParser#specificAlternativeFlow}.
+	 * Enter a parse tree produced by {@link FRSLParser#alternativeFlow}.
 	 * @param ctx the parse tree
 	 */
-	void enterSpecificAlternativeFlow(FRSLParser.SpecificAlternativeFlowContext ctx);
+	void enterAlternativeFlow(FRSLParser.AlternativeFlowContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FRSLParser#specificAlternativeFlow}.
+	 * Exit a parse tree produced by {@link FRSLParser#alternativeFlow}.
 	 * @param ctx the parse tree
 	 */
-	void exitSpecificAlternativeFlow(FRSLParser.SpecificAlternativeFlowContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FRSLParser#globalAlternativeFlow}.
-	 * @param ctx the parse tree
-	 */
-	void enterGlobalAlternativeFlow(FRSLParser.GlobalAlternativeFlowContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FRSLParser#globalAlternativeFlow}.
-	 * @param ctx the parse tree
-	 */
-	void exitGlobalAlternativeFlow(FRSLParser.GlobalAlternativeFlowContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FRSLParser#boundedAlternativeFlow}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoundedAlternativeFlow(FRSLParser.BoundedAlternativeFlowContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FRSLParser#boundedAlternativeFlow}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoundedAlternativeFlow(FRSLParser.BoundedAlternativeFlowContext ctx);
+	void exitAlternativeFlow(FRSLParser.AlternativeFlowContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FRSLParser#step}.
 	 * @param ctx the parse tree

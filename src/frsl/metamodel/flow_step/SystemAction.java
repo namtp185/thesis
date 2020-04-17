@@ -1,5 +1,11 @@
 package frsl.metamodel.flow_step;
 
-public class SystemAction extends Action {
+import com.google.gson.Gson;
 
+public class SystemAction extends Action {
+	
+	public String toString() {
+		return new Gson().toJson(this);
+	}
+	
 }

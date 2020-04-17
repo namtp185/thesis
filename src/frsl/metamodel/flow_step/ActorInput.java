@@ -1,5 +1,11 @@
 package frsl.metamodel.flow_step;
 
-public class ActorInput extends ActorAction{
+import com.google.gson.Gson;
 
+public class ActorInput extends ActorAction{
+	
+	public String toString() {
+		return new Gson().toJson(this);
+	}
+	
 }

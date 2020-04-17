@@ -232,37 +232,13 @@ public class FRSLBaseListener implements FRSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSpecificAlternativeFlows(FRSLParser.SpecificAlternativeFlowsContext ctx) { }
+	@Override public void enterAlternativeFlows(FRSLParser.AlternativeFlowsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSpecificAlternativeFlows(FRSLParser.SpecificAlternativeFlowsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGlobalAlternativeFlows(FRSLParser.GlobalAlternativeFlowsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGlobalAlternativeFlows(FRSLParser.GlobalAlternativeFlowsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBoundedAlternativeFlows(FRSLParser.BoundedAlternativeFlowsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBoundedAlternativeFlows(FRSLParser.BoundedAlternativeFlowsContext ctx) { }
+	@Override public void exitAlternativeFlows(FRSLParser.AlternativeFlowsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -280,37 +256,13 @@ public class FRSLBaseListener implements FRSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSpecificAlternativeFlow(FRSLParser.SpecificAlternativeFlowContext ctx) { }
+	@Override public void enterAlternativeFlow(FRSLParser.AlternativeFlowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSpecificAlternativeFlow(FRSLParser.SpecificAlternativeFlowContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGlobalAlternativeFlow(FRSLParser.GlobalAlternativeFlowContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGlobalAlternativeFlow(FRSLParser.GlobalAlternativeFlowContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBoundedAlternativeFlow(FRSLParser.BoundedAlternativeFlowContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBoundedAlternativeFlow(FRSLParser.BoundedAlternativeFlowContext ctx) { }
+	@Override public void exitAlternativeFlow(FRSLParser.AlternativeFlowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

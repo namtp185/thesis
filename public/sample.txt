@@ -5,8 +5,7 @@ Precondition: The librarian has logged into the system successful.
 Postcondition: If the use case successfully ends, the book loan is saved and a complete message is shown. In the other case, the system displays an error message.
 Trigger: The Librarian requests a book_loan process.
 Special requirement: There is no special requirement.
-Flows:
-Basic flows:
+Basic flow:
 Step 1: The Librarian selects the Lend Book function.
 Step 2: The system shows the lend_book window, gets the current date and assigns it to the book_loan date.
 Step 3: The Librarian enters a book copy id.
@@ -18,7 +17,7 @@ Step 8: The system validates the conditions to lend book. If it is invalid, the 
 Step 9: The system saves the book loan record, then executing two steps, step 10 and step 11 concurrently.
 Step 10: The system shows a complete message.
 Step 11: The system prints the borrowing bill.
-Specific alternative flows:
+Alternative flows:
 Flow 4a: The book copy id is invalid
 Step 1: The system shows an error message, then going to step 3.
 Flow 6a: The Borrower id is invalid
@@ -26,7 +25,6 @@ Step 1: The system shows an error message, then going to step 5.
 Flow 8a: The lending condition is invalid
 Step 1: The system shows an error message.
 Step 2: The system ends the use case.
-Global alternative flows:
 Flow E1: request searched book
 Step 1: The Librarian selects the search function after step 4a1.
 Step 2: The system executes the extending use case Search book.

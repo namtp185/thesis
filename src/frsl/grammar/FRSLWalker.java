@@ -1,22 +1,32 @@
 package frsl.grammar;
 
-import frsl.grammar.FRSLBaseListener;
-import frsl.metamodel.UseCase;
+import java.util.ArrayList;
+
+import frsl.metamodel.*;
 
 public class FRSLWalker extends FRSLBaseListener {
-	public static String test;
 
 	private UseCase metaModel;
 
 	public UseCase getMetaModel() {
-		metaModel = new UseCase();
-		System.out.println("parse to FRSL model");
 		return metaModel;
 	}
 
-	@Override
 	public void enterMetaModel(FRSLParser.MetaModelContext ctx) {
-		test = ctx.useCaseName().use_case_name().getText().strip();
+		metaModel = new UseCase();
+		metaModel.setDescriptionInfo(new DescriptionInfo());
+		metaModel.setContraints(new ArrayList<Contraint>());
+		metaModel.setVariables(new ArrayList<Variable>());
+		metaModel.setFlowEdges(new ArrayList<FlowEdge>());
+		metaModel.setUslNodes(new ArrayList<USLNode>());		
+	}
+
+	public void enterUse_case_name(FRSLParser.Use_case_nameContext ctx) {
+		metaModel.getDescriptionInfo().setUseCaseName(ctx.getText().strip());
+	}
+	
+	public void enterUse_case_description(FRSLParser.Use_case_descriptionContext ctx) {
+		metaModel.getDescriptionInfo().setDescription(ctx.getText().strip());
 	}
 
 }

@@ -1,5 +1,11 @@
 package frsl.metamodel;
 
-public class USLNode {
+import com.google.gson.Gson;
 
+public class USLNode {
+	
+	public String toString() {
+		return new Gson().toJson(this);
+	}
+	
 }
