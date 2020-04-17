@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sequence diagram</title>
+</head>
+<body>
+<textarea id="input" hidden>
+sequenceDiagram
+participant Librarian
+participant System
+Librarian-&gt;&gt;System: step 1: selects the Lend Book function.
+System--&gt;&gt;Librarian: step 2: shows the lend_book window, gets the current date and assigns &lt;br/&gt;it to the book_loan date.
+Librarian-&gt;&gt;System: step 3: enters a book copy id.
+System-&gt;&gt;System: step 4: checks the book copy id.
+alt  it is invalid
+System--&gt;&gt;Librarian: step 4a1: shows an error message, then going to step 3.
+end
+Librarian-&gt;&gt;System: step 5: enters a borrower id.
+System-&gt;&gt;System: step 6: validates the borrower id.
+alt  it is invalid
+System--&gt;&gt;Librarian: step 6a1: shows an error message, then going to step 5.
+end
+Librarian-&gt;&gt;System: step 7: clicks the save_book_loan button.
+System-&gt;&gt;System: step 8: validates the conditions to lend book.
+alt  it is invalid
+System--&gt;&gt;Librarian: step 8a1: shows an error message.
+System--&gt;&gt;Librarian: step 8a2: ends the use case.
+end
+System-&gt;&gt;System: step 9: saves the book loan record, then executing two steps, step &lt;br/&gt;10 and step 11 concurrently.
+System--&gt;&gt;Librarian: step 10: shows a complete message.
+System--&gt;&gt;Librarian: step 11: prints the borrowing bill.
+opt Flow E1: request searched book 
+Librarian-&gt;&gt;System: step E11: selects the search function after step 4a1.
+System--&gt;&gt;Librarian: step E12: executes the extending use case Search book.
+end
+
+
+</textarea>
+<div style="display:none">
+    Your code (for debugging):
+    <pre id="preview"></pre>
+</div>
+<div id="output" style="margin:20px"></div>
+  <script src="https://unpkg.com/mermaid@8.4.8/dist/mermaid.js"></script>
+<script>
+var input = document.getElementById("input");
+var preview = document.getElementById("preview");
+var output = document.getElementById("output");
+var renderBtn = document.getElementById("render");
+mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      securityLevel: 'loose',
+      sequence: {
+       	actorMargin: 400,
+      	messageMargin: 50,
+      	mirrorActors:false
+      }
+});
+preview.innerHTML = input.value;
+mermaid.render('theGraph', input.value, function(svgCode) {
+    output.innerHTML = svgCode;
+});
+
+
+
+</script>
+
+<style>
+</style>
+
+</body>
+</html>
