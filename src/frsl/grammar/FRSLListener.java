@@ -178,15 +178,15 @@ public interface FRSLListener extends ParseTreeListener {
 	 */
 	void exitSpecial_requirement(FRSLParser.Special_requirementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FRSLParser#basicFlows}.
+	 * Enter a parse tree produced by {@link FRSLParser#basicFlow}.
 	 * @param ctx the parse tree
 	 */
-	void enterBasicFlows(FRSLParser.BasicFlowsContext ctx);
+	void enterBasicFlow(FRSLParser.BasicFlowContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FRSLParser#basicFlows}.
+	 * Exit a parse tree produced by {@link FRSLParser#basicFlow}.
 	 * @param ctx the parse tree
 	 */
-	void exitBasicFlows(FRSLParser.BasicFlowsContext ctx);
+	void exitBasicFlow(FRSLParser.BasicFlowContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FRSLParser#alternativeFlows}.
 	 * @param ctx the parse tree

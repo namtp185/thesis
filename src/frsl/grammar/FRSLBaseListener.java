@@ -220,13 +220,13 @@ public class FRSLBaseListener implements FRSLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBasicFlows(FRSLParser.BasicFlowsContext ctx) { }
+	@Override public void enterBasicFlow(FRSLParser.BasicFlowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBasicFlows(FRSLParser.BasicFlowsContext ctx) { }
+	@Override public void exitBasicFlow(FRSLParser.BasicFlowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

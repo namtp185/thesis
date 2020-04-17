@@ -62,7 +62,7 @@ pre_condition
 post_condition
 trigger_info
 special_requirement
-basicFlows
+basicFlow
 alternativeFlows
 basicStep
 alternativeFlow

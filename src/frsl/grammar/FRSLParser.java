@@ -26,14 +26,14 @@ public class FRSLParser extends Parser {
 		RULE_specialRequirement = 7, RULE_flows = 8, RULE_use_case_name = 9, RULE_use_case_description = 10, 
 		RULE_actor_names = 11, RULE_actor_name = 12, RULE_pre_condition = 13, 
 		RULE_post_condition = 14, RULE_trigger_info = 15, RULE_special_requirement = 16, 
-		RULE_basicFlows = 17, RULE_alternativeFlows = 18, RULE_basicStep = 19, 
+		RULE_basicFlow = 17, RULE_alternativeFlows = 18, RULE_basicStep = 19, 
 		RULE_alternativeFlow = 20, RULE_step = 21, RULE_aFlow = 22;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"metaModel", "useCaseName", "useCaseDescription", "actors", "precondition", 
 			"postcondition", "trigger", "specialRequirement", "flows", "use_case_name", 
 			"use_case_description", "actor_names", "actor_name", "pre_condition", 
-			"post_condition", "trigger_info", "special_requirement", "basicFlows", 
+			"post_condition", "trigger_info", "special_requirement", "basicFlow", 
 			"alternativeFlows", "basicStep", "alternativeFlow", "step", "aFlow"
 		};
 	}
@@ -528,8 +528,8 @@ public class FRSLParser extends Parser {
 	}
 
 	public static class FlowsContext extends ParserRuleContext {
-		public BasicFlowsContext basicFlows() {
-			return getRuleContext(BasicFlowsContext.class,0);
+		public BasicFlowContext basicFlow() {
+			return getRuleContext(BasicFlowContext.class,0);
 		}
 		public TerminalNode NEWLINE() { return getToken(FRSLParser.NEWLINE, 0); }
 		public AlternativeFlowsContext alternativeFlows() {
@@ -557,7 +557,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(93);
-			basicFlows();
+			basicFlow();
 			setState(96);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -911,7 +911,7 @@ public class FRSLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class BasicFlowsContext extends ParserRuleContext {
+	public static class BasicFlowContext extends ParserRuleContext {
 		public List<TerminalNode> NEWLINE() { return getTokens(FRSLParser.NEWLINE); }
 		public TerminalNode NEWLINE(int i) {
 			return getToken(FRSLParser.NEWLINE, i);
@@ -922,23 +922,23 @@ public class FRSLParser extends Parser {
 		public BasicStepContext basicStep(int i) {
 			return getRuleContext(BasicStepContext.class,i);
 		}
-		public BasicFlowsContext(ParserRuleContext parent, int invokingState) {
+		public BasicFlowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_basicFlows; }
+		@Override public int getRuleIndex() { return RULE_basicFlow; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FRSLListener ) ((FRSLListener)listener).enterBasicFlows(this);
+			if ( listener instanceof FRSLListener ) ((FRSLListener)listener).enterBasicFlow(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FRSLListener ) ((FRSLListener)listener).exitBasicFlows(this);
+			if ( listener instanceof FRSLListener ) ((FRSLListener)listener).exitBasicFlow(this);
 		}
 	}
 
-	public final BasicFlowsContext basicFlows() throws RecognitionException {
-		BasicFlowsContext _localctx = new BasicFlowsContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_basicFlows);
+	public final BasicFlowContext basicFlow() throws RecognitionException {
+		BasicFlowContext _localctx = new BasicFlowContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_basicFlow);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
