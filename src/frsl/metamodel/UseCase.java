@@ -14,8 +14,6 @@ public class UseCase {
 
 	List<USLNode> uslNodes;
 
-	List<Contraint> contraints;
-
 	public String toString() {
 		return new Gson().toJson(this);
 	}
@@ -50,14 +48,6 @@ public class UseCase {
 
 	public void setUslNodes(List<USLNode> uslNodes) {
 		this.uslNodes = uslNodes;
-	}
-
-	public List<Contraint> getContraints() {
-		return contraints;
-	}
-
-	public void setContraints(List<Contraint> contraints) {
-		this.contraints = contraints;
 	}
 
 }

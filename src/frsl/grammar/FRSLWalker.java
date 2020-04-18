@@ -17,7 +17,6 @@ public class FRSLWalker extends FRSLBaseListener {
 	public void enterMetaModel(FRSLParser.MetaModelContext ctx) {
 		metaModel = new UseCase();
 		metaModel.setDescriptionInfo(new DescriptionInfo());
-		metaModel.setContraints(new ArrayList<Contraint>());
 		metaModel.setVariables(new ArrayList<Variable>());
 		metaModel.setFlowEdges(new ArrayList<FlowEdge>());
 		metaModel.setUslNodes(new ArrayList<USLNode>());
