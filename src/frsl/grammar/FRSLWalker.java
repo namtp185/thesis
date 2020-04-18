@@ -69,5 +69,10 @@ public class FRSLWalker extends FRSLBaseListener {
 		flowStep.setDescription(ctx.STATEMENT().getText().strip());
 		metaModel.getUslNodes().add(flowStep);
 	}
+	
+	public void exitMetaModel(FRSLParser.MetaModelContext ctx) {
+		// Extracted some basic information from text (write concreteSyntax)  and push to metalmodel (of abtractSystax).
+		// Now, we are extracting more information,and push to metalmodel .
+	};
 
 }
