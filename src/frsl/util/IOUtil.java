@@ -29,7 +29,7 @@ public class IOUtil {
 			Scanner scanner = new Scanner(new File(filePath), "UTF-8");
 			String text = scanner.useDelimiter("\\A").next();
 			scanner.close();
-			return text.strip();
+			return text.trim();
 		} catch (Exception e) {
 //			e.printStackTrace();
 			return null;

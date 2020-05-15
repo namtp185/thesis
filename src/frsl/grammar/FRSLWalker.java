@@ -23,11 +23,11 @@ public class FRSLWalker extends FRSLBaseListener {
 	}
 
 	public void enterUse_case_name(FRSLParser.Use_case_nameContext ctx) {
-		metaModel.getDescriptionInfo().setUseCaseName(ctx.getText().strip());
+		metaModel.getDescriptionInfo().setUseCaseName(ctx.getText().trim());
 	}
 
 	public void enterUse_case_description(FRSLParser.Use_case_descriptionContext ctx) {
-		metaModel.getDescriptionInfo().setDescription(ctx.getText().strip());
+		metaModel.getDescriptionInfo().setDescription(ctx.getText().trim());
 	}
 
 	public void enterActor_names(FRSLParser.Actor_namesContext ctx) {
@@ -35,23 +35,23 @@ public class FRSLWalker extends FRSLBaseListener {
 	}
 	
 	public void enterActor_name(FRSLParser.Actor_nameContext ctx) {
-		metaModel.getDescriptionInfo().getActors().add(ctx.getText().strip());
+		metaModel.getDescriptionInfo().getActors().add(ctx.getText().trim());
 	}
 	
 	public void enterPre_condition(FRSLParser.Pre_conditionContext ctx) {
-		metaModel.getDescriptionInfo().setPostCondition(ctx.getText().strip());
+		metaModel.getDescriptionInfo().setPostCondition(ctx.getText().trim());
 	}
 	
 	public void enterPost_condition(FRSLParser.Post_conditionContext ctx) { 
-		metaModel.getDescriptionInfo().setPostCondition(ctx.getText().strip());
+		metaModel.getDescriptionInfo().setPostCondition(ctx.getText().trim());
 	}
 	
 	public void enterTrigger_info(FRSLParser.Trigger_infoContext ctx) {
-		metaModel.getDescriptionInfo().setTrigger(ctx.getText().strip());
+		metaModel.getDescriptionInfo().setTrigger(ctx.getText().trim());
 	}
 	
 	public void enterSpecial_requirement(FRSLParser.Special_requirementContext ctx) {
-		metaModel.getDescriptionInfo().setSpecialRequirement(ctx.getText().strip());
+		metaModel.getDescriptionInfo().setSpecialRequirement(ctx.getText().trim());
 	}
 	
 	public void enterBasicFlow(FRSLParser.BasicFlowContext ctx) {
@@ -59,14 +59,14 @@ public class FRSLWalker extends FRSLBaseListener {
 	}
 	
 	public void enterAFlow(FRSLParser.AFlowContext ctx) {
-		currentFlowName = ctx.LETTER().getText().strip() ;
+		currentFlowName = ctx.LETTER().getText().trim() ;
 	}
 	
 	public void enterBasicStep(FRSLParser.BasicStepContext ctx) {
 		FlowStep flowStep = new FlowStep();
 		flowStep.setType(currentFlowName);
-		flowStep.setName(ctx.step().LETTER().getText().strip());
-		flowStep.setDescription(ctx.STATEMENT().getText().strip());
+		flowStep.setName(ctx.step().LETTER().getText().trim());
+		flowStep.setDescription(ctx.STATEMENT().getText().trim());
 		metaModel.getUslNodes().add(flowStep);
 	}
 	
