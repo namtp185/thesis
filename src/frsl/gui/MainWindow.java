@@ -35,6 +35,7 @@ import frsl.runtime.IRuntime;
 import frsl.runtime.Log;
 import frsl.runtime.PluginActionProxy;
 import frsl.runtime.RuntimeUtil;
+import frsl.util.MetamodelUtil;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
@@ -202,6 +203,7 @@ public class MainWindow extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "Compilation successfully", "Success",
 						JOptionPane.INFORMATION_MESSAGE);
+				System.out.println(MetamodelUtil.getAllSystemStep(metaModel));
 			}
 
 		}

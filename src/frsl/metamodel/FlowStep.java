@@ -12,6 +12,8 @@ public class FlowStep extends USLNode {
 
 	private String type;
 
+	private boolean isValid;
+
 	public String toString() {
 		return new Gson().toJson(this);
 	}
@@ -46,6 +48,14 @@ public class FlowStep extends USLNode {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public boolean isValid() {
+		return isValid;
+	}
+
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
 	}
 
 }
