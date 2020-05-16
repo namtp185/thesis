@@ -45,6 +45,17 @@ public class MetamodelUtil {
 		return null;
 	}
 
+	public static String findActorNameInSentence(String sentence, UseCase metaModel) {
+		String actorName = null;
+		for (String aName : metaModel.getDescriptionInfo().getActors()) {
+			if (sentence.contains(aName.toLowerCase())) {
+				actorName = aName;
+				break;
+			}
+		}
+		return actorName;
+	}
+
 	public static FlowStep findFlowStep(String stepname, UseCase metaModel) {
 		for (USLNode node : metaModel.getUslNodes()) {
 			if (!(node instanceof FlowStep)) {

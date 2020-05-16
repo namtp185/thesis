@@ -15,6 +15,7 @@ import frsl.metamodel.flow_step.Contraint;
 import frsl.metamodel.flow_step.SystemStep;
 import frsl.util.CloneFactory;
 import frsl.util.FlowStepTypeChecker;
+import frsl.util.MetamodelUtil;
 import frsl.util.SentenceTypeChecker;
 
 public class FRSLWalker extends FRSLBaseListener {
@@ -103,14 +104,7 @@ public class FRSLWalker extends FRSLBaseListener {
 			// if ActorStep
 			if (type == 1) {
 				ActorStep as= (ActorStep)CloneFactory.fromFlowStep(ActorStep.class, fs);
-				String actorName = null;
-				for(String aName: metaModel.getDescriptionInfo().getActors()) {
-					if(as.getDescription().toLowerCase().contains(aName.toLowerCase())) {
-						actorName =aName;
-						break;
-					}
-				}
-				as.setActorName(actorName);
+				as.setActorName(MetamodelUtil.findActorNameInSentence(as.getDescription().toLowerCase(),metaModel));
 				metaModel.getUslNodes().set(i,as);
 			}
 			if (type == -1) {
@@ -144,11 +138,13 @@ public class FRSLWalker extends FRSLBaseListener {
 				//firstFlowEdge.setGuard(guard);
 				flowEdges.add(firstFlowEdge);
 				isHasInitalNode = true;
-				preFlowStep = fs;
 			}else {
 				int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
-				//
-				
+				FlowEdge fe = new FlowEdge();
+				if (type == 0) {
+					//fe.setSource(source);
+					//fe.setTarget(target);
+				}				
 			}
 		}
 	};

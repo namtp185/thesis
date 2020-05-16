@@ -21,6 +21,7 @@ public class SentenceTypeChecker {
 				// concurrent
 				return 3;
 			}
+			return -1;
 		}
 		// normal type
 		return 0;
