@@ -203,7 +203,8 @@ public class MainWindow extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "Compilation successfully", "Success",
 						JOptionPane.INFORMATION_MESSAGE);
-				System.out.println(MetamodelUtil.getAllActorStep(metaModel));
+//				System.out.println(MetamodelUtil.getAllActorStep(metaModel));
+				System.out.println(metaModel.getFlowEdges());
 			}
 
 		}

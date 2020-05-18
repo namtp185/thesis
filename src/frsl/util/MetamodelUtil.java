@@ -37,7 +37,13 @@ public class MetamodelUtil {
 			if (!(node instanceof FlowStep)) {
 				continue;
 			}
-			String stepName = "step " + ((FlowStep) node).getName();
+			FlowStep fs = (FlowStep) node;
+			String stepName = "step ";
+			if (fs.getType().equalsIgnoreCase("Basic Flow")) {
+				stepName = stepName + fs.getName();
+			} else {
+				stepName = stepName + fs.getType() + fs.getName();
+			}
 			if (sentence.contains(stepName)) {
 				return stepName;
 			}
@@ -61,9 +67,16 @@ public class MetamodelUtil {
 			if (!(node instanceof FlowStep)) {
 				continue;
 			}
-			String stepName = "step " + stepname.toLowerCase();
+			String stepName = stepname.toLowerCase();
+			String currentStepName;
 			FlowStep fs = (FlowStep) node;
-			if (fs.getName().equalsIgnoreCase(stepName)) {
+			if (fs.getType().equalsIgnoreCase("Basic Flow")) {
+				currentStepName = fs.getName();
+			} else {
+				currentStepName = fs.getType() + fs.getName();
+			}
+
+			if (currentStepName.equalsIgnoreCase(stepName)) {
 				return fs;
 			}
 		}

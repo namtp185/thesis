@@ -9,11 +9,11 @@ Basic flow:
 Step 1: The Librarian selects the Lend Book function.
 Step 2: The system shows the lend_book window, gets the current date and assigns it to the book_loan date.
 Step 3: The Librarian enters a book copy id.
-Step 4: The system checks the book copy id. If it is invalid, it goes to step 4a1.
+Step 4: The system checks the book copy id. If it is invalid then it goes to step 4a1.
 Step 5: The Librarian enters a borrower id.
-Step 6: The system validates the borrower id. If it is invalid, it goes to step 6a1.
+Step 6: The system validates the borrower id. If it is invalid then goes to step 6a1.
 Step 7: The Librarian clicks the save_book_loan button.
-Step 8: The system validates the conditions to lend book. If it is invalid, the system goes to step 8a1.
+Step 8: The system validates the conditions to lend book. If it is invalid then the system goes to step 8a1.
 Step 9: The system saves the book loan record, then executing two steps, step 10 and step 11 concurrently.
 Step 10: The system shows a complete message.
 Step 11: The system prints the borrowing bill.

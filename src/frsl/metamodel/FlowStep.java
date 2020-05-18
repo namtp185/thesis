@@ -3,7 +3,7 @@ package frsl.metamodel;
 import com.google.gson.Gson;
 
 public class FlowStep extends USLNode {
-
+	
 	private String name;
 
 	private String description;
