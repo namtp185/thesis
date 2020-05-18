@@ -94,4 +94,8 @@ public class MetamodelUtil {
 		}
 		return result;
 	}
+	
+	public static boolean checkNodeIsTargetOfOneInFlowEdges(USLNode node, UseCase metaModel) {
+		return false;
+	}
 }

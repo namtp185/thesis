@@ -1,7 +1,9 @@
 package frsl.grammar;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +27,8 @@ import frsl.util.SentenceTypeChecker;
 public class FRSLWalker extends FRSLBaseListener {
 
 	private UseCase metaModel;
+
+	private Set<String> flows = new HashSet<String>();
 
 	private String currentFlowName;
 
@@ -78,6 +82,7 @@ public class FRSLWalker extends FRSLBaseListener {
 
 	public void enterAFlow(FRSLParser.AFlowContext ctx) {
 		currentFlowName = ctx.LETTER().getText().trim();
+		flows.add(currentFlowName);
 	}
 
 	public void enterBasicStep(FRSLParser.BasicStepContext ctx) {
@@ -119,7 +124,6 @@ public class FRSLWalker extends FRSLBaseListener {
 
 		// create FlowEdeg;
 		List<USLNode> uslNodes = metaModel.getUslNodes();
-		System.out.println(uslNodes);
 		boolean isHasInitalNode = false;
 		boolean isHasFinalNode = false;
 		USLNode preNode = null;
@@ -138,28 +142,33 @@ public class FRSLWalker extends FRSLBaseListener {
 				preNode = initialNode;
 				isHasInitalNode = true;
 			}
-			int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
-			if (type == 0) {
-				// normal
+			if (preNode == null) {
+				if (MetamodelUtil.checkNodeIsTargetOfOneInFlowEdges(fs,metaModel)) {
+					continue;
+				}else {
+					fs.setValid(false);
+					continue;
+				}
+			}else {
 				FlowEdge fe = new FlowEdge();
 				fe.setSource(preNode);
 				fe.setTarget(fs);
 				metaModel.getFlowEdges().add(fe);
+			}
+			int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
+			if (type == 0) {
+				// normal
 				preNode = fs;
 			}
 			if (type == 1) {
-				// condition			
-				FlowEdge fePreToFS = new FlowEdge();
-				fePreToFS.setSource(preNode);
-				fePreToFS.setTarget(fs);
-				metaModel.getFlowEdges().add(fePreToFS);
+				// condition
 				
 				DecisionNode decisionNode = new DecisionNode();
 				decisionNode.setDescription(fs.getDescription());
 				FlowEdge feFSToDN = new FlowEdge();
 				feFSToDN.setSource(fs);
 				feFSToDN.setTarget(decisionNode);
-				metaModel.getFlowEdges().add(feFSToDN);				
+				metaModel.getFlowEdges().add(feFSToDN);
 
 				String description = fs.getDescription().toLowerCase();
 				if (description.contains("else")) {
@@ -170,44 +179,43 @@ public class FRSLWalker extends FRSLBaseListener {
 					if (m.find()) {
 						String condition = m.group(1).trim();
 						String trueStep = m.group(2);
-						String falseStep = m.group(3);	
-						
+						String falseStep = m.group(3);
+
 						FlowEdge trueFlowEdge = new FlowEdge();
 						trueFlowEdge.setSource(decisionNode);
 						trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
 						Contraint trueContraint = new Contraint(condition);
 						trueFlowEdge.setGuard(trueContraint);
 						metaModel.getFlowEdges().add(trueFlowEdge);
-						
+
 						FlowEdge falseFlowEdge = new FlowEdge();
 						falseFlowEdge.setSource(decisionNode);
 						falseFlowEdge.setTarget(MetamodelUtil.findFlowStep(falseStep, metaModel));
 						Contraint falseContraint = new Contraint("Condition is invalid");
 						falseFlowEdge.setGuard(falseContraint);
 						metaModel.getFlowEdges().add(falseFlowEdge);
-						
+
 						preNode = null;
 					}
-				}else {
+				} else {
 					// if condition then.... (default else is next step of flow)
-					Pattern r = Pattern.compile(
-							"(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>\\.)");
+					Pattern r = Pattern.compile("(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>\\.)");
 					Matcher m = r.matcher(description);
 					if (m.find()) {
 						String condition = m.group(1).trim();
 						String trueStep = m.group(2);
-						
+
 						FlowEdge trueFlowEdge = new FlowEdge();
 						trueFlowEdge.setSource(decisionNode);
 						trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
 						Contraint trueContraint = new Contraint(condition);
 						trueFlowEdge.setGuard(trueContraint);
 						metaModel.getFlowEdges().add(trueFlowEdge);
-						
+
 						preNode = decisionNode;
 					}
 				}
-				
+
 			}
 			if (type == 2) {
 				// iteration
