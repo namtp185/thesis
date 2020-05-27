@@ -14,6 +14,7 @@ import frsl.metamodel.USLNode;
 import frsl.metamodel.UseCase;
 import frsl.metamodel.Variable;
 import frsl.metamodel.control_node.DecisionNode;
+import frsl.metamodel.control_node.FinalNode;
 import frsl.metamodel.control_node.ForkNode;
 import frsl.metamodel.control_node.InitialNode;
 import frsl.metamodel.flow_step.ActorStep;
@@ -28,6 +29,10 @@ public class FRSLWalker extends FRSLBaseListener {
 
 	private UseCase metaModel;
 
+	private boolean isHasInitalNode = false;
+	private boolean isHasFinalNode = false;
+	private FinalNode finalNode;
+	
 	private Set<String> flows = new HashSet<String>();
 
 	private String currentFlowName;
@@ -78,6 +83,7 @@ public class FRSLWalker extends FRSLBaseListener {
 
 	public void enterBasicFlow(FRSLParser.BasicFlowContext ctx) {
 		currentFlowName = "Basic Flow";
+		flows.add(currentFlowName);
 	}
 
 	public void enterAFlow(FRSLParser.AFlowContext ctx) {
@@ -124,108 +130,130 @@ public class FRSLWalker extends FRSLBaseListener {
 
 		// create FlowEdeg;
 		List<USLNode> uslNodes = metaModel.getUslNodes();
-		boolean isHasInitalNode = false;
-		boolean isHasFinalNode = false;
 		USLNode preNode = null;
-		for (int i = 0; i < uslNodes.size(); i++) {
-			if (!(metaModel.getUslNodes().get(i) instanceof FlowStep)) {
-				continue;
-			}
-			FlowStep fs = (FlowStep) metaModel.getUslNodes().get(i);
-			if (!fs.getType().equalsIgnoreCase("Basic Flow")) {
-				continue;
-			}
-			if (!isHasInitalNode) {
-				// create initialNode
-				InitialNode initialNode = new InitialNode();
-				// initialNode.setPreUC(new Contraint("Pre use case name"));
-				preNode = initialNode;
-				isHasInitalNode = true;
-			}
-			if (preNode == null) {
-				if (MetamodelUtil.checkNodeIsTargetOfOneInFlowEdges(fs,metaModel)) {
-					continue;
-				}else {
-					fs.setValid(false);
+		for (String flow : flows) {
+			System.out.println(flow);
+			for (int i = 0; i < uslNodes.size(); i++) {
+				if (!(metaModel.getUslNodes().get(i) instanceof FlowStep)) {
 					continue;
 				}
-			}else {
-				FlowEdge fe = new FlowEdge();
-				fe.setSource(preNode);
-				fe.setTarget(fs);
-				metaModel.getFlowEdges().add(fe);
-			}
-			int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
-			if (type == 0) {
-				// normal
-				preNode = fs;
-			}
-			if (type == 1) {
-				// condition
-				
-				DecisionNode decisionNode = new DecisionNode();
-				decisionNode.setDescription(fs.getDescription());
-				FlowEdge feFSToDN = new FlowEdge();
-				feFSToDN.setSource(fs);
-				feFSToDN.setTarget(decisionNode);
-				metaModel.getFlowEdges().add(feFSToDN);
-
-				String description = fs.getDescription().toLowerCase();
-				if (description.contains("else")) {
-					// if condition then.... else...
-					Pattern r = Pattern.compile(
-							"(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>else).*step *([A-z0-9]+).*(?>\\.)");
-					Matcher m = r.matcher(description);
-					if (m.find()) {
-						String condition = m.group(1).trim();
-						String trueStep = m.group(2);
-						String falseStep = m.group(3);
-
-						FlowEdge trueFlowEdge = new FlowEdge();
-						trueFlowEdge.setSource(decisionNode);
-						trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
-						Contraint trueContraint = new Contraint(condition);
-						trueFlowEdge.setGuard(trueContraint);
-						metaModel.getFlowEdges().add(trueFlowEdge);
-
-						FlowEdge falseFlowEdge = new FlowEdge();
-						falseFlowEdge.setSource(decisionNode);
-						falseFlowEdge.setTarget(MetamodelUtil.findFlowStep(falseStep, metaModel));
-						Contraint falseContraint = new Contraint("Condition is invalid");
-						falseFlowEdge.setGuard(falseContraint);
-						metaModel.getFlowEdges().add(falseFlowEdge);
-
-						preNode = null;
+				FlowStep fs = (FlowStep) metaModel.getUslNodes().get(i);
+				if (!fs.getType().equalsIgnoreCase(flow)) {
+					continue;
+				}
+				if (!isHasInitalNode) {
+					// create initialNode
+					InitialNode initialNode = new InitialNode();
+					// initialNode.setPreUC(new Contraint("Pre use case name"));
+					preNode = initialNode;
+					isHasInitalNode = true;
+				}
+				if (preNode == null) {
+					if (MetamodelUtil.checkNodeIsTargetOfOneInFlowEdges(fs, metaModel)) {
+						continue;
+					} else {
+						fs.setValid(false);
+						continue;
 					}
 				} else {
-					// if condition then.... (default else is next step of flow)
-					Pattern r = Pattern.compile("(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>\\.)");
-					Matcher m = r.matcher(description);
-					if (m.find()) {
-						String condition = m.group(1).trim();
-						String trueStep = m.group(2);
-
-						FlowEdge trueFlowEdge = new FlowEdge();
-						trueFlowEdge.setSource(decisionNode);
-						trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
-						Contraint trueContraint = new Contraint(condition);
-						trueFlowEdge.setGuard(trueContraint);
-						metaModel.getFlowEdges().add(trueFlowEdge);
-
-						preNode = decisionNode;
-					}
+					FlowEdge fe = new FlowEdge();
+					fe.setSource(preNode);
+					fe.setTarget(fs);
+					metaModel.getFlowEdges().add(fe);
 				}
+				int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
+				if (type == 0) {
+					// normal
+					preNode = fs;
+				}
+				if (type == 1) {
+					// condition
 
-			}
-			if (type == 2) {
-				// iteration
-			}
-			if (type == 3) {
-				// concurrent
-				ForkNode forkNode = new ForkNode();
-				forkNode.setDescription(fs.getDescription());
-				preNode = forkNode;
+					DecisionNode decisionNode = new DecisionNode();
+					decisionNode.setDescription(fs.getDescription());
+					FlowEdge feFSToDN = new FlowEdge();
+					feFSToDN.setSource(fs);
+					feFSToDN.setTarget(decisionNode);
+					metaModel.getFlowEdges().add(feFSToDN);
 
+					String description = fs.getDescription().toLowerCase();
+					if (description.contains("else")) {
+						// if condition then.... else...
+						Pattern r = Pattern.compile(
+								"(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>else).*step *([A-z0-9]+).*(?>\\.)");
+						Matcher m = r.matcher(description);
+						if (m.find()) {
+							String condition = m.group(1).trim();
+							String trueStep = m.group(2);
+							String falseStep = m.group(3);
+
+							FlowEdge trueFlowEdge = new FlowEdge();
+							trueFlowEdge.setSource(decisionNode);
+							trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
+							Contraint trueContraint = new Contraint(condition);
+							trueFlowEdge.setGuard(trueContraint);
+							metaModel.getFlowEdges().add(trueFlowEdge);
+
+							FlowEdge falseFlowEdge = new FlowEdge();
+							falseFlowEdge.setSource(decisionNode);
+							falseFlowEdge.setTarget(MetamodelUtil.findFlowStep(falseStep, metaModel));
+							Contraint falseContraint = new Contraint("Condition is invalid");
+							falseFlowEdge.setGuard(falseContraint);
+							metaModel.getFlowEdges().add(falseFlowEdge);
+
+							preNode = null;
+						}
+					} else {
+						// if condition then.... (default else is next step of flow)
+						Pattern r = Pattern.compile("(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>\\.)");
+						Matcher m = r.matcher(description);
+						if (m.find()) {
+							String condition = m.group(1).trim();
+							String trueStep = m.group(2);
+
+							FlowEdge trueFlowEdge = new FlowEdge();
+							trueFlowEdge.setSource(decisionNode);
+							trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
+							Contraint trueContraint = new Contraint(condition);
+							trueFlowEdge.setGuard(trueContraint);
+							metaModel.getFlowEdges().add(trueFlowEdge);
+
+							preNode = decisionNode;
+						}
+					}
+
+				}
+				if (type == 2) {
+					// iteration
+				}
+				if (type == 3) {
+					// concurrent
+					ForkNode forkNode = new ForkNode();
+					forkNode.setDescription(fs.getDescription());
+					preNode = forkNode;
+
+				}
+				if (type == 4 ) {
+					// go to
+					FlowStep targetStep = MetamodelUtil.findFlowStep(MetamodelUtil.findStepNames(fs, metaModel).get(0), metaModel);
+					FlowEdge feToOtherNode = new FlowEdge();
+					feToOtherNode.setSource(fs);
+					feToOtherNode.setTarget(targetStep);
+					metaModel.getFlowEdges().add(feToOtherNode);
+					preNode=fs;
+				}
+				if (type == 5 ) {
+					if (!isHasFinalNode) {
+						// create initialNode
+						finalNode = new FinalNode();
+						isHasFinalNode = true;
+					}
+					FlowEdge feToEndNode = new FlowEdge();
+					feToEndNode.setSource(fs);
+					feToEndNode.setTarget(finalNode);
+					metaModel.getFlowEdges().add(feToEndNode);
+					preNode=null;
+				}
 			}
 		}
 	};
