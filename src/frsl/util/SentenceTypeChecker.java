@@ -10,7 +10,7 @@ public class SentenceTypeChecker {
 			return 5;
 		}
 		if (MetamodelUtil.isContainStepName(sentence, metaModel)!=null) {
-			if (sentence.contains(" go ") || sentence.contains(" goes ")) {
+			if (sentence.contains(" go ") || sentence.contains(" goes ") || sentence.contains(" going ")) {
 				if(sentence.contains("if ")){
 					// condition
 					return 1;

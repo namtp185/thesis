@@ -3,6 +3,8 @@ package frsl.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import frsl.metamodel.ControlNode;
+import frsl.metamodel.FlowEdge;
 import frsl.metamodel.FlowStep;
 import frsl.metamodel.USLNode;
 import frsl.metamodel.UseCase;
@@ -44,7 +46,7 @@ public class MetamodelUtil {
 			} else {
 				stepName = stepName + fs.getType() + fs.getName();
 			}
-			if (sentence.contains(stepName)) {
+			if ((sentence.replace(".", " ").replace(",", " ")).contains(stepName+" ")) {
 				return stepName;
 			}
 		}
@@ -63,6 +65,8 @@ public class MetamodelUtil {
 	}
 
 	public static FlowStep findFlowStep(String stepname, UseCase metaModel) {
+		if(stepname==null) return null;
+
 		for (USLNode node : metaModel.getUslNodes()) {
 			if (!(node instanceof FlowStep)) {
 				continue;
@@ -75,27 +79,29 @@ public class MetamodelUtil {
 			} else {
 				currentStepName = fs.getType() + fs.getName();
 			}
-
-			if (currentStepName.equalsIgnoreCase(stepName)) {
+			if (currentStepName.equalsIgnoreCase(stepName)) {				
 				return fs;
 			}
 		}
 		return null;
 	}
 
-	public static List<String> findStepNames(FlowStep fs, UseCase metaModel) {
+	public static String findStepName(FlowStep fs, UseCase metaModel) {
 		List<String> result = new ArrayList<>();
 		String sentence = fs.getDescription().toLowerCase();
-		String stepName = isContainStepName(sentence, metaModel);
-		while (stepName == null) {
-			result.add(stepName.replace("step ", ""));
-			sentence = sentence.replace(stepName, "");
-			stepName = isContainStepName(sentence, metaModel);
-		}
-		return result;
+		return isContainStepName(sentence, metaModel).replace("step", "").trim();
 	}
-	
+
 	public static boolean checkNodeIsTargetOfOneInFlowEdges(USLNode node, UseCase metaModel) {
+		for (FlowEdge fe : metaModel.getFlowEdges()) {
+			if (fe.getTarget() instanceof FlowStep && node instanceof FlowStep
+					&& ((FlowStep) fe.getTarget()).getType().equalsIgnoreCase(((FlowStep) node).getType())
+					&& ((FlowStep) fe.getTarget()).getName().equalsIgnoreCase(((FlowStep) node).getName()))
+				return true;
+			if (fe.getTarget() instanceof ControlNode && node instanceof ControlNode
+					&& ((ControlNode) fe.getTarget()).getDescription().equalsIgnoreCase(((ControlNode) node).getDescription())
+					) return true;
+		}
 		return false;
 	}
 }

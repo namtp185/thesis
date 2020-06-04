@@ -132,7 +132,7 @@ public class FRSLWalker extends FRSLBaseListener {
 		List<USLNode> uslNodes = metaModel.getUslNodes();
 		USLNode preNode = null;
 		for (String flow : flows) {
-			System.out.println(flow);
+			preNode= null;
 			for (int i = 0; i < uslNodes.size(); i++) {
 				if (!(metaModel.getUslNodes().get(i) instanceof FlowStep)) {
 					continue;
@@ -150,17 +150,18 @@ public class FRSLWalker extends FRSLBaseListener {
 				}
 				if (preNode == null) {
 					if (MetamodelUtil.checkNodeIsTargetOfOneInFlowEdges(fs, metaModel)) {
-						continue;
 					} else {
 						fs.setValid(false);
+						preNode =fs;
 						continue;
 					}
-				} else {
+				}else{
 					FlowEdge fe = new FlowEdge();
 					fe.setSource(preNode);
 					fe.setTarget(fs);
 					metaModel.getFlowEdges().add(fe);
 				}
+
 				int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
 				if (type == 0) {
 					// normal
@@ -235,12 +236,16 @@ public class FRSLWalker extends FRSLBaseListener {
 				}
 				if (type == 4 ) {
 					// go to
-					FlowStep targetStep = MetamodelUtil.findFlowStep(MetamodelUtil.findStepNames(fs, metaModel).get(0), metaModel);
+					preNode= null;
+					String targetStepName = MetamodelUtil.findStepName(fs, metaModel);
+					if (targetStepName == null) {
+						preNode= null;
+					}
+					FlowStep targetStep = MetamodelUtil.findFlowStep(targetStepName, metaModel);
 					FlowEdge feToOtherNode = new FlowEdge();
 					feToOtherNode.setSource(fs);
 					feToOtherNode.setTarget(targetStep);
 					metaModel.getFlowEdges().add(feToOtherNode);
-					preNode=fs;
 				}
 				if (type == 5 ) {
 					if (!isHasFinalNode) {
