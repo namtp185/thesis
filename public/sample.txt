@@ -20,11 +20,11 @@ Step 11: The system prints the borrowing bill.
 Step 12: The system ends the use case.
 Alternative flows:
 Flow 4a: The book copy id is invalid
-Step 1: The system shows an error message, then going to step 3.
+Step 1: The system shows an error message. Then going to step 3.
 Flow 6a: The Borrower id is invalid
-Step 1: The system shows an error message, then going to step 5.
+Step 1: The system shows an error message. Then going to step 5.
 Flow 8a: The lending condition is invalid
-Step 1: The system shows an error message, then going to step 12.
+Step 1: The system shows an error message. Then going to step 12.
 Flow E1: request searched book
 Step 1: The Librarian selects the search function after step 4a1.
 Step 2: The system executes the extending use case Search book.

@@ -18,6 +18,8 @@ public class FlowStep extends USLNode {
 
 	private boolean isValid;
 
+	private String actionDescription;
+
 	private List<Action> actions;
 
 	public String toString() {
@@ -70,6 +72,14 @@ public class FlowStep extends USLNode {
 
 	public void setActions(List<Action> actions) {
 		this.actions = actions;
+	}
+
+	public String getActionDescription() {
+		return actionDescription;
+	}
+
+	public void setActionDescription(String actionDescription) {
+		this.actionDescription = actionDescription;
 	}
 
 }

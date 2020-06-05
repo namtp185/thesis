@@ -18,6 +18,7 @@ public class CloneFactory {
 			newInstance.setMaxloop(instance.getMaxloop());
 			newInstance.setValid(instance.isValid());
 			newInstance.setId(instance.getId());
+			newInstance.setActionDescription(instance.getActionDescription());
 			newInstance.setActions(instance.getActions());
 			return newInstance;
 		} catch (Exception e) {
@@ -35,6 +36,7 @@ public class CloneFactory {
 			newInstance.setMaxloop(instance.getMaxloop());
 			newInstance.setValid(instance.isValid());
 			newInstance.setId(instance.getId());
+			newInstance.setActionDescription(instance.getActionDescription());
 			newInstance.setActions(instance.getActions());
 			newInstance.setActorName(instance.getActorName());
 			return newInstance;
@@ -53,6 +55,7 @@ public class CloneFactory {
 			newInstance.setMaxloop(instance.getMaxloop());
 			newInstance.setValid(instance.isValid());
 			newInstance.setId(instance.getId());
+			newInstance.setActionDescription(instance.getActionDescription());
 			newInstance.setActions(instance.getActions());
 			return newInstance;
 		} catch (Exception e) {

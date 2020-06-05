@@ -96,6 +96,8 @@ public class FRSLWalker extends FRSLBaseListener {
 		flowStep.setType(currentFlowName);
 		flowStep.setName(ctx.step().LETTER().getText().trim().toLowerCase());
 		flowStep.setDescription(ctx.STATEMENT().getText().trim());
+		
+		flowStep.setActionDescription(flowStep.getDescription().substring(0,flowStep.getDescription().indexOf(".")));
 		flowStep.setValid(true);
 		if (currentFlowName.equalsIgnoreCase("Basic Flow")) {
 			flowStep.setId("Step_" + flowStep.getName());
