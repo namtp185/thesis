@@ -1,9 +1,13 @@
 package frsl.metamodel;
 
+import java.util.List;
+
 import com.google.gson.Gson;
 
+import frsl.metamodel.flow_step.Action;
+
 public class FlowStep extends USLNode {
-	
+
 	private String name;
 
 	private String description;
@@ -13,6 +17,8 @@ public class FlowStep extends USLNode {
 	private String type;
 
 	private boolean isValid;
+
+	private List<Action> actions;
 
 	public String toString() {
 		return new Gson().toJson(this);
@@ -56,6 +62,14 @@ public class FlowStep extends USLNode {
 
 	public void setValid(boolean isValid) {
 		this.isValid = isValid;
+	}
+
+	public List<Action> getActions() {
+		return actions;
+	}
+
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
 	}
 
 }

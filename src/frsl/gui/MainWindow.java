@@ -65,9 +65,6 @@ public class MainWindow extends JFrame {
 
 	private ActionCompileAndRun actionCompileAndRun = new ActionCompileAndRun();
 
-	// data
-	public String test = "hello from main window";
-
 	private UseCase metaModel;
 
 	private static IRuntime pluginRuntime;
@@ -203,8 +200,6 @@ public class MainWindow extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "Compilation successfully", "Success",
 						JOptionPane.INFORMATION_MESSAGE);
-//				System.out.println(MetamodelUtil.getAllActorStep(metaModel));
-				System.out.println(metaModel.getFlowEdges());
 			}
 
 		}

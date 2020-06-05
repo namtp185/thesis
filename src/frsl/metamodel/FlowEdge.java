@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import frsl.metamodel.flow_step.Contraint;
 
 public class FlowEdge {
+	
+	private String id;
 
 	private USLNode source;
 
@@ -38,6 +40,14 @@ public class FlowEdge {
 
 	public void setGuard(Contraint guard) {
 		this.guard = guard;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

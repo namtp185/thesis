@@ -26,6 +26,7 @@ public class GrammarUtil {
 			walker.walk(FRSLWalker, tree);
 			return FRSLWalker.getMetaModel();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

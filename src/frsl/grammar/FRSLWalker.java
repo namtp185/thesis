@@ -32,7 +32,7 @@ public class FRSLWalker extends FRSLBaseListener {
 	private boolean isHasInitalNode = false;
 	private boolean isHasFinalNode = false;
 	private FinalNode finalNode;
-	
+
 	private Set<String> flows = new HashSet<String>();
 
 	private String currentFlowName;
@@ -97,6 +97,11 @@ public class FRSLWalker extends FRSLBaseListener {
 		flowStep.setName(ctx.step().LETTER().getText().trim().toLowerCase());
 		flowStep.setDescription(ctx.STATEMENT().getText().trim());
 		flowStep.setValid(true);
+		if (currentFlowName.equalsIgnoreCase("Basic Flow")) {
+			flowStep.setId("Step_" + flowStep.getName());
+		} else {
+			flowStep.setId("Step_" + flowStep.getType().replace(" ", "") + flowStep.getName());
+		}
 		metaModel.getUslNodes().add(flowStep);
 	}
 
@@ -132,7 +137,7 @@ public class FRSLWalker extends FRSLBaseListener {
 		List<USLNode> uslNodes = metaModel.getUslNodes();
 		USLNode preNode = null;
 		for (String flow : flows) {
-			preNode= null;
+			preNode = null;
 			for (int i = 0; i < uslNodes.size(); i++) {
 				if (!(metaModel.getUslNodes().get(i) instanceof FlowStep)) {
 					continue;
@@ -144,7 +149,7 @@ public class FRSLWalker extends FRSLBaseListener {
 				if (!isHasInitalNode) {
 					// create initialNode
 					InitialNode initialNode = new InitialNode();
-					// initialNode.setPreUC(new Contraint("Pre use case name"));
+					initialNode.setId("InitialNode");
 					preNode = initialNode;
 					isHasInitalNode = true;
 				}
@@ -152,13 +157,14 @@ public class FRSLWalker extends FRSLBaseListener {
 					if (MetamodelUtil.checkNodeIsTargetOfOneInFlowEdges(fs, metaModel)) {
 					} else {
 						fs.setValid(false);
-						preNode =fs;
+						preNode = fs;
 						continue;
 					}
-				}else{
+				} else {
 					FlowEdge fe = new FlowEdge();
 					fe.setSource(preNode);
 					fe.setTarget(fs);
+					fe = CloneFactory.validateFlowEdgeType(fe);
 					metaModel.getFlowEdges().add(fe);
 				}
 
@@ -171,10 +177,11 @@ public class FRSLWalker extends FRSLBaseListener {
 					// condition
 
 					DecisionNode decisionNode = new DecisionNode();
-					decisionNode.setDescription(fs.getDescription());
+					decisionNode.setId("DecisionNode" + fs.getId());
 					FlowEdge feFSToDN = new FlowEdge();
 					feFSToDN.setSource(fs);
 					feFSToDN.setTarget(decisionNode);
+					feFSToDN = CloneFactory.validateFlowEdgeType(feFSToDN);
 					metaModel.getFlowEdges().add(feFSToDN);
 
 					String description = fs.getDescription().toLowerCase();
@@ -187,19 +194,22 @@ public class FRSLWalker extends FRSLBaseListener {
 							String condition = m.group(1).trim();
 							String trueStep = m.group(2);
 							String falseStep = m.group(3);
+							decisionNode.setDescription(condition);
 
 							FlowEdge trueFlowEdge = new FlowEdge();
 							trueFlowEdge.setSource(decisionNode);
 							trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
-							Contraint trueContraint = new Contraint(condition);
+							Contraint trueContraint = new Contraint("Condition is true");
 							trueFlowEdge.setGuard(trueContraint);
+							trueFlowEdge = CloneFactory.validateFlowEdgeType(trueFlowEdge);
 							metaModel.getFlowEdges().add(trueFlowEdge);
 
 							FlowEdge falseFlowEdge = new FlowEdge();
 							falseFlowEdge.setSource(decisionNode);
 							falseFlowEdge.setTarget(MetamodelUtil.findFlowStep(falseStep, metaModel));
-							Contraint falseContraint = new Contraint("Condition is invalid");
+							Contraint falseContraint = new Contraint("Condition is false");
 							falseFlowEdge.setGuard(falseContraint);
+							falseFlowEdge = CloneFactory.validateFlowEdgeType(falseFlowEdge);
 							metaModel.getFlowEdges().add(falseFlowEdge);
 
 							preNode = null;
@@ -211,12 +221,14 @@ public class FRSLWalker extends FRSLBaseListener {
 						if (m.find()) {
 							String condition = m.group(1).trim();
 							String trueStep = m.group(2);
+							decisionNode.setDescription(condition);
 
 							FlowEdge trueFlowEdge = new FlowEdge();
 							trueFlowEdge.setSource(decisionNode);
 							trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
-							Contraint trueContraint = new Contraint(condition);
+							Contraint trueContraint = new Contraint("Condition is true");
 							trueFlowEdge.setGuard(trueContraint);
+							trueFlowEdge = CloneFactory.validateFlowEdgeType(trueFlowEdge);
 							metaModel.getFlowEdges().add(trueFlowEdge);
 
 							preNode = decisionNode;
@@ -234,30 +246,33 @@ public class FRSLWalker extends FRSLBaseListener {
 					preNode = forkNode;
 
 				}
-				if (type == 4 ) {
+				if (type == 4) {
 					// go to
-					preNode= null;
+					preNode = null;
 					String targetStepName = MetamodelUtil.findStepName(fs, metaModel);
 					if (targetStepName == null) {
-						preNode= null;
+						preNode = null;
 					}
 					FlowStep targetStep = MetamodelUtil.findFlowStep(targetStepName, metaModel);
 					FlowEdge feToOtherNode = new FlowEdge();
 					feToOtherNode.setSource(fs);
 					feToOtherNode.setTarget(targetStep);
+					feToOtherNode = CloneFactory.validateFlowEdgeType(feToOtherNode);
 					metaModel.getFlowEdges().add(feToOtherNode);
 				}
-				if (type == 5 ) {
+				if (type == 5) {
 					if (!isHasFinalNode) {
 						// create initialNode
 						finalNode = new FinalNode();
+						finalNode.setId("FinalNode");
 						isHasFinalNode = true;
 					}
 					FlowEdge feToEndNode = new FlowEdge();
 					feToEndNode.setSource(fs);
 					feToEndNode.setTarget(finalNode);
+					feToEndNode = CloneFactory.validateFlowEdgeType(feToEndNode);
 					metaModel.getFlowEdges().add(feToEndNode);
-					preNode=null;
+					preNode = null;
 				}
 			}
 		}

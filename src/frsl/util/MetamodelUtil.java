@@ -8,6 +8,9 @@ import frsl.metamodel.FlowEdge;
 import frsl.metamodel.FlowStep;
 import frsl.metamodel.USLNode;
 import frsl.metamodel.UseCase;
+import frsl.metamodel.control_node.DecisionNode;
+import frsl.metamodel.control_node.FinalNode;
+import frsl.metamodel.control_node.InitialNode;
 import frsl.metamodel.flow_step.ActorStep;
 import frsl.metamodel.flow_step.SystemStep;
 
@@ -46,7 +49,7 @@ public class MetamodelUtil {
 			} else {
 				stepName = stepName + fs.getType() + fs.getName();
 			}
-			if ((sentence.replace(".", " ").replace(",", " ")).contains(stepName+" ")) {
+			if ((sentence.replace(".", " ").replace(",", " ")).contains(stepName + " ")) {
 				return stepName;
 			}
 		}
@@ -65,7 +68,8 @@ public class MetamodelUtil {
 	}
 
 	public static FlowStep findFlowStep(String stepname, UseCase metaModel) {
-		if(stepname==null) return null;
+		if (stepname == null)
+			return null;
 
 		for (USLNode node : metaModel.getUslNodes()) {
 			if (!(node instanceof FlowStep)) {
@@ -79,7 +83,7 @@ public class MetamodelUtil {
 			} else {
 				currentStepName = fs.getType() + fs.getName();
 			}
-			if (currentStepName.equalsIgnoreCase(stepName)) {				
+			if (currentStepName.equalsIgnoreCase(stepName)) {
 				return fs;
 			}
 		}
@@ -98,9 +102,18 @@ public class MetamodelUtil {
 					&& ((FlowStep) fe.getTarget()).getType().equalsIgnoreCase(((FlowStep) node).getType())
 					&& ((FlowStep) fe.getTarget()).getName().equalsIgnoreCase(((FlowStep) node).getName()))
 				return true;
-			if (fe.getTarget() instanceof ControlNode && node instanceof ControlNode
-					&& ((ControlNode) fe.getTarget()).getDescription().equalsIgnoreCase(((ControlNode) node).getDescription())
-					) return true;
+			if (fe.getTarget() instanceof ControlNode && node instanceof ControlNode && ((ControlNode) fe.getTarget())
+					.getDescription().equalsIgnoreCase(((ControlNode) node).getDescription()))
+				return true;
+		}
+		return false;
+	}
+
+	public static boolean isHasPreNode(USLNode curNode, UseCase metaModel) {
+		List<FlowEdge> listFe = metaModel.getFlowEdges();
+		for (FlowEdge fe : listFe) {
+			if (fe.getTarget().getId().equalsIgnoreCase(curNode.getId()))
+				return true;
 		}
 		return false;
 	}
