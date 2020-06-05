@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sequence diagram</title>
+</head>
+<body>
+<textarea id="input" hidden>
+{{{content}}}
+</textarea>
+<div style="display:none">
+    Your code (for debugging):
+    <pre id="preview"></pre>
+</div>
+<div id="output" style="margin:20px"></div>
+  <script src="https://unpkg.com/mermaid@8.4.8/dist/mermaid.js"></script>
+<script>
+var input = document.getElementById("input");
+var preview = document.getElementById("preview");
+var output = document.getElementById("output");
+var renderBtn = document.getElementById("render");
+mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      securityLevel: 'loose',
+      sequence: {
+       	actorMargin: 400,
+      	messageMargin: 50,
+      	mirrorActors:false
+      },
+	  flowchart:{
+    	useMaxWidth:false,
+    	htmlLabels:false,
+    	curve:'cardinal',
+	  },
+});
+preview.innerHTML = input.value;
+mermaid.render('theGraph', input.value, function(svgCode) {
+    output.innerHTML = svgCode;
+});
+
+
+
+</script>
+
+<style>
+</style>
+
+</body>
+</html>
