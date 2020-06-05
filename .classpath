@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/antlr-4.8-complete.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/rsyntaxtextarea-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
