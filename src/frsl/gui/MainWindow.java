@@ -23,7 +23,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -35,14 +35,13 @@ import frsl.runtime.IRuntime;
 import frsl.runtime.Log;
 import frsl.runtime.PluginActionProxy;
 import frsl.runtime.RuntimeUtil;
-import frsl.util.MetamodelUtil;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	// UI components
 	public static MainWindow instance;
 
-	private JPanel contentPane;
+	private JTabbedPane contentPane;
 
 	private JToolBar toolBar;
 
@@ -88,13 +87,16 @@ public class MainWindow extends JFrame {
 			}
 		});
 
-		contentPane = new FRSLSpecificationTextEditor();
+		contentPane = new JTabbedPane();
+		// add main tab pane
+		FRSLSpecificationTextEditor frslSpecificationTextEditor = new FRSLSpecificationTextEditor();
+		contentPane.addTab("FRSL Specification Editor", frslSpecificationTextEditor);
 		setContentPane(contentPane);
 
 		toolBar = new JToolBar();
 		addToToolBar(toolBar, actionFRSLTextFileOpen, "Open FRSL text file", null);
 		addToToolBar(toolBar, actionCompileAndRun, "Compile and run", "Compile and run");
-		add(toolBar, BorderLayout.PAGE_START);
+		frslSpecificationTextEditor.add(toolBar, BorderLayout.PAGE_START);
 
 		menuBar = new JMenuBar();
 		getRootPane().setJMenuBar(menuBar);
@@ -178,7 +180,7 @@ public class MainWindow extends JFrame {
 			c.setFileFilter(filter);
 			int rVal = c.showOpenDialog(instance);
 			if (rVal == JFileChooser.APPROVE_OPTION) {
-				((FRSLSpecificationTextEditor) contentPane).loadFromFile(c.getSelectedFile().getPath());
+				FRSLSpecificationTextEditor.loadFromFile(c.getSelectedFile().getPath());
 			}
 		}
 
@@ -193,12 +195,11 @@ public class MainWindow extends JFrame {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			metaModel = GrammarUtil.parseFromText(
-					((FRSLSpecificationTextEditor) instance.getContentPane()).getFrslSpecificationText());
+			metaModel = GrammarUtil.parseFromText(FRSLSpecificationTextEditor.getFrslSpecificationText());
 			if (metaModel == null) {
-				JOptionPane.showMessageDialog(null, "Compilation failed", "Fail", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Compilation failed", "Compiler", JOptionPane.ERROR_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(null, "Compilation successfully", "Success",
+				JOptionPane.showMessageDialog(null, "Compile successfully", "Compiler",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 
@@ -215,12 +216,16 @@ public class MainWindow extends JFrame {
 		}
 	}
 
+	public void reloadMainWindow() {
+		repaint();
+	}
+
 	// setter getter
 	public UseCase getMetaModel() {
 		return metaModel;
 	}
 
-	public JPanel getContentPane() {
+	public JTabbedPane getContentPane() {
 		return contentPane;
 	}
 

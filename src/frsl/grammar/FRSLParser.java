@@ -18,8 +18,8 @@ public class FRSLParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, USECASE=11, DESCRIPTION=12, ACTORS=13, FLOWS=14, NEWLINE=15, 
-		STATEMENT=16, PHRASE=17, LETTER=18, NUMBER=19, WS=20;
+		T__9=10, T__10=11, T__11=12, T__12=13, USECASE=14, DESCRIPTION=15, ACTORS=16, 
+		FLOWS=17, NEWLINE=18, STATEMENT=19, PHRASE=20, LETTER=21, NUMBER=22, WS=23;
 	public static final int
 		RULE_metaModel = 0, RULE_useCaseName = 1, RULE_useCaseDescription = 2, 
 		RULE_actors = 3, RULE_precondition = 4, RULE_postcondition = 5, RULE_trigger = 6, 
@@ -41,17 +41,18 @@ public class FRSLParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'Precondition:'", "'Postcondition:'", "'Trigger:'", "'Special requirement:'", 
-			"','", "'Basic flow:'", "'Alternative flows:'", "':'", "'Step '", "'Flow '", 
+			null, "'UseCase :'", "'BriefDescription :'", "'Actors :'", "'Precondition :'", 
+			"'Postcondition :'", "'Trigger :'", "'SpecialRequirement :'", "','", 
+			"'BasicFlow :'", "'AlternativeFlows :'", "':'", "'Step '", "'Flow '", 
 			"'Use case:'", "'Brief description:'", "'Actors:'", "'Flows:'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, null, "USECASE", 
-			"DESCRIPTION", "ACTORS", "FLOWS", "NEWLINE", "STATEMENT", "PHRASE", "LETTER", 
-			"NUMBER", "WS"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, "USECASE", "DESCRIPTION", "ACTORS", "FLOWS", "NEWLINE", "STATEMENT", 
+			"PHRASE", "LETTER", "NUMBER", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -238,7 +239,6 @@ public class FRSLParser extends Parser {
 	}
 
 	public static class UseCaseNameContext extends ParserRuleContext {
-		public TerminalNode USECASE() { return getToken(FRSLParser.USECASE, 0); }
 		public Use_case_nameContext use_case_name() {
 			return getRuleContext(Use_case_nameContext.class,0);
 		}
@@ -263,7 +263,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(72);
-			match(USECASE);
+			match(T__0);
 			setState(73);
 			use_case_name();
 			}
@@ -280,7 +280,6 @@ public class FRSLParser extends Parser {
 	}
 
 	public static class UseCaseDescriptionContext extends ParserRuleContext {
-		public TerminalNode DESCRIPTION() { return getToken(FRSLParser.DESCRIPTION, 0); }
 		public Use_case_descriptionContext use_case_description() {
 			return getRuleContext(Use_case_descriptionContext.class,0);
 		}
@@ -305,7 +304,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(75);
-			match(DESCRIPTION);
+			match(T__1);
 			setState(76);
 			use_case_description();
 			}
@@ -322,7 +321,6 @@ public class FRSLParser extends Parser {
 	}
 
 	public static class ActorsContext extends ParserRuleContext {
-		public TerminalNode ACTORS() { return getToken(FRSLParser.ACTORS, 0); }
 		public Actor_namesContext actor_names() {
 			return getRuleContext(Actor_namesContext.class,0);
 		}
@@ -347,7 +345,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(78);
-			match(ACTORS);
+			match(T__2);
 			setState(79);
 			actor_names();
 			}
@@ -388,7 +386,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(81);
-			match(T__0);
+			match(T__3);
 			setState(82);
 			pre_condition();
 			}
@@ -429,7 +427,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(84);
-			match(T__1);
+			match(T__4);
 			setState(85);
 			post_condition();
 			}
@@ -470,7 +468,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(87);
-			match(T__2);
+			match(T__5);
 			setState(88);
 			trigger_info();
 			}
@@ -511,7 +509,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(90);
-			match(T__3);
+			match(T__6);
 			setState(91);
 			special_requirement();
 			}
@@ -693,10 +691,10 @@ public class FRSLParser extends Parser {
 				setState(104);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T__4:
+				case T__7:
 					{
 					setState(102);
-					match(T__4);
+					match(T__7);
 					}
 					break;
 				case PHRASE:
@@ -712,7 +710,7 @@ public class FRSLParser extends Parser {
 				setState(106); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__4 || _la==PHRASE );
+			} while ( _la==T__7 || _la==PHRASE );
 			}
 		}
 		catch (RecognitionException re) {
@@ -944,7 +942,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(118);
-			match(T__5);
+			match(T__8);
 			setState(119);
 			match(NEWLINE);
 			setState(122); 
@@ -957,7 +955,7 @@ public class FRSLParser extends Parser {
 					setState(122);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
-					case T__8:
+					case T__11:
 						{
 						setState(120);
 						basicStep();
@@ -1027,7 +1025,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(126);
-			match(T__6);
+			match(T__9);
 			setState(127);
 			match(NEWLINE);
 			setState(130); 
@@ -1038,7 +1036,7 @@ public class FRSLParser extends Parser {
 				setState(130);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case T__9:
+				case T__12:
 					{
 					setState(128);
 					alternativeFlow();
@@ -1057,7 +1055,7 @@ public class FRSLParser extends Parser {
 				setState(132); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__9 || _la==NEWLINE );
+			} while ( _la==T__12 || _la==NEWLINE );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1099,7 +1097,7 @@ public class FRSLParser extends Parser {
 			setState(134);
 			step();
 			setState(135);
-			match(T__7);
+			match(T__10);
 			setState(136);
 			match(STATEMENT);
 			}
@@ -1154,7 +1152,7 @@ public class FRSLParser extends Parser {
 			setState(138);
 			aFlow();
 			setState(139);
-			match(T__7);
+			match(T__10);
 			setState(140);
 			match(PHRASE);
 			setState(143); 
@@ -1167,7 +1165,7 @@ public class FRSLParser extends Parser {
 					setState(143);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
-					case T__8:
+					case T__11:
 						{
 						setState(141);
 						basicStep();
@@ -1227,7 +1225,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(147);
-			match(T__8);
+			match(T__11);
 			setState(148);
 			match(LETTER);
 			}
@@ -1266,7 +1264,7 @@ public class FRSLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(150);
-			match(T__9);
+			match(T__12);
 			setState(151);
 			match(LETTER);
 			}
@@ -1283,7 +1281,7 @@ public class FRSLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\26\u009c\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31\u009c\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\3\2\3\2\3"+
@@ -1299,29 +1297,29 @@ public class FRSLParser extends Parser {
 		"\2\2\2\fV\3\2\2\2\16Y\3\2\2\2\20\\\3\2\2\2\22_\3\2\2\2\24d\3\2\2\2\26"+
 		"f\3\2\2\2\30j\3\2\2\2\32n\3\2\2\2\34p\3\2\2\2\36r\3\2\2\2 t\3\2\2\2\""+
 		"v\3\2\2\2$x\3\2\2\2&\u0080\3\2\2\2(\u0088\3\2\2\2*\u008c\3\2\2\2,\u0095"+
-		"\3\2\2\2.\u0098\3\2\2\2\60\63\5\4\3\2\61\62\7\21\2\2\62\64\5\6\4\2\63"+
-		"\61\3\2\2\2\63\64\3\2\2\2\64\65\3\2\2\2\65\66\7\21\2\2\669\5\b\5\2\67"+
-		"8\7\21\2\28:\5\n\6\29\67\3\2\2\29:\3\2\2\2:=\3\2\2\2;<\7\21\2\2<>\5\f"+
-		"\7\2=;\3\2\2\2=>\3\2\2\2>A\3\2\2\2?@\7\21\2\2@B\5\16\b\2A?\3\2\2\2AB\3"+
-		"\2\2\2BE\3\2\2\2CD\7\21\2\2DF\5\20\t\2EC\3\2\2\2EF\3\2\2\2FG\3\2\2\2G"+
-		"H\7\21\2\2HI\5\22\n\2I\3\3\2\2\2JK\7\r\2\2KL\5\24\13\2L\5\3\2\2\2MN\7"+
-		"\16\2\2NO\5\26\f\2O\7\3\2\2\2PQ\7\17\2\2QR\5\30\r\2R\t\3\2\2\2ST\7\3\2"+
-		"\2TU\5\34\17\2U\13\3\2\2\2VW\7\4\2\2WX\5\36\20\2X\r\3\2\2\2YZ\7\5\2\2"+
-		"Z[\5 \21\2[\17\3\2\2\2\\]\7\6\2\2]^\5\"\22\2^\21\3\2\2\2_b\5$\23\2`a\7"+
-		"\21\2\2ac\5&\24\2b`\3\2\2\2bc\3\2\2\2c\23\3\2\2\2de\7\23\2\2e\25\3\2\2"+
-		"\2fg\7\22\2\2g\27\3\2\2\2hk\7\7\2\2ik\5\32\16\2jh\3\2\2\2ji\3\2\2\2kl"+
-		"\3\2\2\2lj\3\2\2\2lm\3\2\2\2m\31\3\2\2\2no\7\23\2\2o\33\3\2\2\2pq\7\22"+
-		"\2\2q\35\3\2\2\2rs\7\22\2\2s\37\3\2\2\2tu\7\22\2\2u!\3\2\2\2vw\7\22\2"+
-		"\2w#\3\2\2\2xy\7\b\2\2y|\7\21\2\2z}\5(\25\2{}\7\21\2\2|z\3\2\2\2|{\3\2"+
-		"\2\2}~\3\2\2\2~|\3\2\2\2~\177\3\2\2\2\177%\3\2\2\2\u0080\u0081\7\t\2\2"+
-		"\u0081\u0084\7\21\2\2\u0082\u0085\5*\26\2\u0083\u0085\7\21\2\2\u0084\u0082"+
+		"\3\2\2\2.\u0098\3\2\2\2\60\63\5\4\3\2\61\62\7\24\2\2\62\64\5\6\4\2\63"+
+		"\61\3\2\2\2\63\64\3\2\2\2\64\65\3\2\2\2\65\66\7\24\2\2\669\5\b\5\2\67"+
+		"8\7\24\2\28:\5\n\6\29\67\3\2\2\29:\3\2\2\2:=\3\2\2\2;<\7\24\2\2<>\5\f"+
+		"\7\2=;\3\2\2\2=>\3\2\2\2>A\3\2\2\2?@\7\24\2\2@B\5\16\b\2A?\3\2\2\2AB\3"+
+		"\2\2\2BE\3\2\2\2CD\7\24\2\2DF\5\20\t\2EC\3\2\2\2EF\3\2\2\2FG\3\2\2\2G"+
+		"H\7\24\2\2HI\5\22\n\2I\3\3\2\2\2JK\7\3\2\2KL\5\24\13\2L\5\3\2\2\2MN\7"+
+		"\4\2\2NO\5\26\f\2O\7\3\2\2\2PQ\7\5\2\2QR\5\30\r\2R\t\3\2\2\2ST\7\6\2\2"+
+		"TU\5\34\17\2U\13\3\2\2\2VW\7\7\2\2WX\5\36\20\2X\r\3\2\2\2YZ\7\b\2\2Z["+
+		"\5 \21\2[\17\3\2\2\2\\]\7\t\2\2]^\5\"\22\2^\21\3\2\2\2_b\5$\23\2`a\7\24"+
+		"\2\2ac\5&\24\2b`\3\2\2\2bc\3\2\2\2c\23\3\2\2\2de\7\26\2\2e\25\3\2\2\2"+
+		"fg\7\25\2\2g\27\3\2\2\2hk\7\n\2\2ik\5\32\16\2jh\3\2\2\2ji\3\2\2\2kl\3"+
+		"\2\2\2lj\3\2\2\2lm\3\2\2\2m\31\3\2\2\2no\7\26\2\2o\33\3\2\2\2pq\7\25\2"+
+		"\2q\35\3\2\2\2rs\7\25\2\2s\37\3\2\2\2tu\7\25\2\2u!\3\2\2\2vw\7\25\2\2"+
+		"w#\3\2\2\2xy\7\13\2\2y|\7\24\2\2z}\5(\25\2{}\7\24\2\2|z\3\2\2\2|{\3\2"+
+		"\2\2}~\3\2\2\2~|\3\2\2\2~\177\3\2\2\2\177%\3\2\2\2\u0080\u0081\7\f\2\2"+
+		"\u0081\u0084\7\24\2\2\u0082\u0085\5*\26\2\u0083\u0085\7\24\2\2\u0084\u0082"+
 		"\3\2\2\2\u0084\u0083\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0084\3\2\2\2\u0086"+
-		"\u0087\3\2\2\2\u0087\'\3\2\2\2\u0088\u0089\5,\27\2\u0089\u008a\7\n\2\2"+
-		"\u008a\u008b\7\22\2\2\u008b)\3\2\2\2\u008c\u008d\5.\30\2\u008d\u008e\7"+
-		"\n\2\2\u008e\u0091\7\23\2\2\u008f\u0092\5(\25\2\u0090\u0092\7\21\2\2\u0091"+
+		"\u0087\3\2\2\2\u0087\'\3\2\2\2\u0088\u0089\5,\27\2\u0089\u008a\7\r\2\2"+
+		"\u008a\u008b\7\25\2\2\u008b)\3\2\2\2\u008c\u008d\5.\30\2\u008d\u008e\7"+
+		"\r\2\2\u008e\u0091\7\26\2\2\u008f\u0092\5(\25\2\u0090\u0092\7\24\2\2\u0091"+
 		"\u008f\3\2\2\2\u0091\u0090\3\2\2\2\u0092\u0093\3\2\2\2\u0093\u0091\3\2"+
-		"\2\2\u0093\u0094\3\2\2\2\u0094+\3\2\2\2\u0095\u0096\7\13\2\2\u0096\u0097"+
-		"\7\24\2\2\u0097-\3\2\2\2\u0098\u0099\7\f\2\2\u0099\u009a\7\24\2\2\u009a"+
+		"\2\2\u0093\u0094\3\2\2\2\u0094+\3\2\2\2\u0095\u0096\7\16\2\2\u0096\u0097"+
+		"\7\27\2\2\u0097-\3\2\2\2\u0098\u0099\7\17\2\2\u0099\u009a\7\27\2\2\u009a"+
 		"/\3\2\2\2\20\639=AEbjl|~\u0084\u0086\u0091\u0093";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
