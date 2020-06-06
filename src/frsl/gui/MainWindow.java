@@ -6,8 +6,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Event;
+import java.awt.GridBagConstraints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -17,8 +19,10 @@ import java.util.Set;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -90,12 +94,13 @@ public class MainWindow extends JFrame {
 		contentPane = new JTabbedPane();
 		// add main tab pane
 		FRSLSpecificationTextEditor frslSpecificationTextEditor = new FRSLSpecificationTextEditor();
+
 		contentPane.addTab("FRSL Specification Editor", frslSpecificationTextEditor);
 		setContentPane(contentPane);
 
 		toolBar = new JToolBar();
 		addToToolBar(toolBar, actionFRSLTextFileOpen, "Open FRSL text file", null);
-		addToToolBar(toolBar, actionCompile, "Compile and run", "Compile and run");
+		addToToolBar(toolBar, actionCompile, "Compile model", "Compile model");
 		frslSpecificationTextEditor.add(toolBar, BorderLayout.PAGE_START);
 
 		menuBar = new JMenuBar();
