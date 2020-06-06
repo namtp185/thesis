@@ -62,7 +62,7 @@ public class MainWindow extends JFrame {
 
 	private ActionHelpAbout actionHelpAbout = new ActionHelpAbout();
 
-	private ActionCompileAndRun actionCompileAndRun = new ActionCompileAndRun();
+	private ActionCompile actionCompile = new ActionCompile();
 
 	private UseCase metaModel;
 
@@ -95,7 +95,7 @@ public class MainWindow extends JFrame {
 
 		toolBar = new JToolBar();
 		addToToolBar(toolBar, actionFRSLTextFileOpen, "Open FRSL text file", null);
-		addToToolBar(toolBar, actionCompileAndRun, "Compile and run", "Compile and run");
+		addToToolBar(toolBar, actionCompile, "Compile and run", "Compile and run");
 		frslSpecificationTextEditor.add(toolBar, BorderLayout.PAGE_START);
 
 		menuBar = new JMenuBar();
@@ -186,12 +186,12 @@ public class MainWindow extends JFrame {
 
 	}
 
-	private class ActionCompileAndRun extends AbstractAction {
+	private class ActionCompile extends AbstractAction {
 
 		private static final long serialVersionUID = 1L;
 
-		ActionCompileAndRun() {
-			super("Compile and run");
+		ActionCompile() {
+			super("Compile");
 		}
 
 		public void actionPerformed(ActionEvent e) {
