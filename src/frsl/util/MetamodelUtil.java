@@ -8,9 +8,6 @@ import frsl.metamodel.FlowEdge;
 import frsl.metamodel.FlowStep;
 import frsl.metamodel.USLNode;
 import frsl.metamodel.UseCase;
-import frsl.metamodel.control_node.DecisionNode;
-import frsl.metamodel.control_node.FinalNode;
-import frsl.metamodel.control_node.InitialNode;
 import frsl.metamodel.flow_step.ActorStep;
 import frsl.metamodel.flow_step.SystemStep;
 
@@ -91,7 +88,6 @@ public class MetamodelUtil {
 	}
 
 	public static String findStepName(FlowStep fs, UseCase metaModel) {
-		List<String> result = new ArrayList<>();
 		String sentence = fs.getDescription().toLowerCase();
 		return isContainStepName(sentence, metaModel).replace("step", "").trim();
 	}

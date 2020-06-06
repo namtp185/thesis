@@ -17,7 +17,7 @@ Step 8: The system validates the conditions to lend book. If it is invalid then 
 Step 9: The system saves the book loan record.
 Step 10: The system shows a complete message.
 Step 11: The system prints the borrowing bill.
-Step 12: The system ends the use case.
+Step 12: The system ends the use case and return home.
 AlternativeFlows :
 Flow 4a: The book copy id is invalid
 Step 1: The system shows an error message. Then going to step 3.
@@ -26,5 +26,5 @@ Step 1: The system shows an error message. Then going to step 5.
 Flow 8a: The lending condition is invalid
 Step 1: The system shows an error message. Then going to step 12.
 Flow E1: request searched book
-Step 1: The Librarian selects the search function after step 4a1.
+Step 1: The Librarian selects the search function.
 Step 2: The system executes the extending use case Search book.
