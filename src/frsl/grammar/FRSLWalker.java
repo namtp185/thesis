@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import frsl.metamodel.AlternateFlowEdge;
+import frsl.metamodel.BasicFlowEdge;
 import frsl.metamodel.DescriptionInfo;
 import frsl.metamodel.FlowEdge;
 import frsl.metamodel.FlowStep;
@@ -17,6 +19,7 @@ import frsl.metamodel.control_node.DecisionNode;
 import frsl.metamodel.control_node.FinalNode;
 import frsl.metamodel.control_node.ForkNode;
 import frsl.metamodel.control_node.InitialNode;
+import frsl.metamodel.control_node.JoinNode;
 import frsl.metamodel.flow_step.ActorStep;
 import frsl.metamodel.flow_step.Contraint;
 import frsl.metamodel.flow_step.SystemStep;
@@ -96,8 +99,8 @@ public class FRSLWalker extends FRSLBaseListener {
 		flowStep.setType(currentFlowName);
 		flowStep.setName(ctx.step().LETTER().getText().trim().toLowerCase());
 		flowStep.setDescription(ctx.STATEMENT().getText().trim());
-		
-		flowStep.setActionDescription(flowStep.getDescription().substring(0,flowStep.getDescription().indexOf(".")));
+
+		flowStep.setActionDescription(flowStep.getDescription().substring(0, flowStep.getDescription().indexOf(".")));
 		flowStep.setValid(true);
 		if (currentFlowName.equalsIgnoreCase("Basic Flow")) {
 			flowStep.setId("Step_" + flowStep.getName());
@@ -138,9 +141,11 @@ public class FRSLWalker extends FRSLBaseListener {
 		// create FlowEdeg;
 		List<USLNode> uslNodes = metaModel.getUslNodes();
 		USLNode preNode = null;
+		boolean isConcurentlyRunning = false;
 		for (String flow : flows) {
 			preNode = null;
 			for (int i = 0; i < uslNodes.size(); i++) {
+				isConcurentlyRunning = false;
 				if (!(metaModel.getUslNodes().get(i) instanceof FlowStep)) {
 					continue;
 				}
@@ -156,28 +161,33 @@ public class FRSLWalker extends FRSLBaseListener {
 					isHasInitalNode = true;
 				}
 				if (preNode == null) {
-					if (MetamodelUtil.checkNodeIsTargetOfOneInFlowEdges(fs, metaModel)) {
-					} else {
+					if (!MetamodelUtil.isTargetOfOneInFlowEdges(fs, metaModel)) {
 						fs.setValid(false);
 						preNode = fs;
 						continue;
 					}
 				} else {
-					FlowEdge fe = new FlowEdge();
-					fe.setSource(preNode);
-					fe.setTarget(fs);
-					fe = CloneFactory.validateFlowEdgeType(fe);
-					metaModel.getFlowEdges().add(fe);
+					if (!MetamodelUtil.isConcurentlyRunning(fs, preNode, metaModel)) {
+						FlowEdge fe = new FlowEdge();
+						fe.setSource(preNode);
+						fe.setTarget(fs);
+						if(preNode instanceof DecisionNode)
+							fe.setGuard(new Contraint("false"));
+						fe = CloneFactory.validateFlowEdgeType(fe);
+						metaModel.getFlowEdges().add(fe);
+					} else {
+						isConcurentlyRunning = true;
+					}
 				}
-
 				int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
-				if (type == 0) {
+				System.out.println("Type " + type + " : " + fs.getDescription());
+				switch (type) {
+				case 0:
 					// normal
 					preNode = fs;
-				}
-				if (type == 1) {
+					break;
+				case 1:
 					// condition
-
 					DecisionNode decisionNode = new DecisionNode();
 					decisionNode.setId("DecisionNode" + fs.getId());
 					FlowEdge feFSToDN = new FlowEdge();
@@ -201,7 +211,7 @@ public class FRSLWalker extends FRSLBaseListener {
 							FlowEdge trueFlowEdge = new FlowEdge();
 							trueFlowEdge.setSource(decisionNode);
 							trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
-							Contraint trueContraint = new Contraint("Condition is true");
+							Contraint trueContraint = new Contraint("True");
 							trueFlowEdge.setGuard(trueContraint);
 							trueFlowEdge = CloneFactory.validateFlowEdgeType(trueFlowEdge);
 							metaModel.getFlowEdges().add(trueFlowEdge);
@@ -209,7 +219,7 @@ public class FRSLWalker extends FRSLBaseListener {
 							FlowEdge falseFlowEdge = new FlowEdge();
 							falseFlowEdge.setSource(decisionNode);
 							falseFlowEdge.setTarget(MetamodelUtil.findFlowStep(falseStep, metaModel));
-							Contraint falseContraint = new Contraint("Condition is false");
+							Contraint falseContraint = new Contraint("False");
 							falseFlowEdge.setGuard(falseContraint);
 							falseFlowEdge = CloneFactory.validateFlowEdgeType(falseFlowEdge);
 							metaModel.getFlowEdges().add(falseFlowEdge);
@@ -228,7 +238,7 @@ public class FRSLWalker extends FRSLBaseListener {
 							FlowEdge trueFlowEdge = new FlowEdge();
 							trueFlowEdge.setSource(decisionNode);
 							trueFlowEdge.setTarget(MetamodelUtil.findFlowStep(trueStep, metaModel));
-							Contraint trueContraint = new Contraint("Condition is true");
+							Contraint trueContraint = new Contraint("True");
 							trueFlowEdge.setGuard(trueContraint);
 							trueFlowEdge = CloneFactory.validateFlowEdgeType(trueFlowEdge);
 							metaModel.getFlowEdges().add(trueFlowEdge);
@@ -237,20 +247,36 @@ public class FRSLWalker extends FRSLBaseListener {
 						}
 					}
 
-				}
-				if (type == 2) {
+					break;
+				case 2:
 					// iteration
-				}
-				if (type == 3) {
+					// has not been processed yet
+					preNode = null;
+					break;
+				case 3:
 					// concurrent
 					ForkNode forkNode = new ForkNode();
 					forkNode.setDescription(fs.getDescription());
-					preNode = forkNode;
+					forkNode.setId("ForkNode" + fs.getId());
 
-				}
-				if (type == 4) {
-					// go to
+					FlowEdge feToForkNode = new FlowEdge();
+					feToForkNode.setSource(fs);
+					feToForkNode.setTarget(forkNode);
+					feToForkNode = CloneFactory.validateFlowEdgeType(feToForkNode);
+					metaModel.getFlowEdges().add(feToForkNode);
+
+					List<String> listStepName = MetamodelUtil.findListStepName(fs, metaModel);
+					for (String stepName : listStepName) {
+						FlowEdge feForkNodeToOther = new FlowEdge();
+						feForkNodeToOther.setSource(forkNode);
+						feForkNodeToOther.setTarget(MetamodelUtil.findFlowStep(stepName, metaModel));
+						feForkNodeToOther = CloneFactory.validateFlowEdgeType(feForkNodeToOther);
+						metaModel.getFlowEdges().add(feForkNodeToOther);
+					}
 					preNode = null;
+					break;
+				case 4:
+					// go to
 					String targetStepName = MetamodelUtil.findStepName(fs, metaModel);
 					if (targetStepName == null) {
 						preNode = null;
@@ -261,23 +287,85 @@ public class FRSLWalker extends FRSLBaseListener {
 					feToOtherNode.setTarget(targetStep);
 					feToOtherNode = CloneFactory.validateFlowEdgeType(feToOtherNode);
 					metaModel.getFlowEdges().add(feToOtherNode);
-				}
-				if (type == 5) {
-					if (!isHasFinalNode) {
-						// create initialNode
-						finalNode = new FinalNode();
-						finalNode.setId("FinalNode");
-						isHasFinalNode = true;
-					}
-					FlowEdge feToEndNode = new FlowEdge();
-					feToEndNode.setSource(fs);
-					feToEndNode.setTarget(finalNode);
-					feToEndNode = CloneFactory.validateFlowEdgeType(feToEndNode);
-					metaModel.getFlowEdges().add(feToEndNode);
 					preNode = null;
+					break;
+				default:
+					// invalid
+					break;
+				}
+				if (isConcurentlyRunning)
+					preNode = preNode;
+			}
+		}
+		for (USLNode node : metaModel.getUslNodes()) {
+			if (!(node instanceof FlowStep))
+				continue;
+			if (!isHasFinalNode) {
+				// create initialNode
+				finalNode = new FinalNode();
+				finalNode.setId("FinalNode");
+				isHasFinalNode = true;
+			}
+			if (!MetamodelUtil.isSourceOfOneInFlowEdges(node, metaModel)) {
+				FlowEdge feToEndNode = new FlowEdge();
+				feToEndNode.setSource(node);
+				feToEndNode.setTarget(finalNode);
+				feToEndNode = CloneFactory.validateFlowEdgeType(feToEndNode);
+				metaModel.getFlowEdges().add(feToEndNode);
+			}
+		}
+		List<List<FlowEdge>> listFlowsOfEachJoinNode = new ArrayList<List<FlowEdge>>();
+		for (FlowEdge fe : metaModel.getFlowEdges()) {
+			List<FlowEdge> listFlowEdges = new ArrayList<FlowEdge>();
+			for (FlowEdge otherFe : metaModel.getFlowEdges()) {
+				if (otherFe.getSource().getId().equalsIgnoreCase(fe.getSource().getId())
+						&& otherFe.getTarget().getId().equalsIgnoreCase(fe.getTarget().getId()))
+					continue;
+				if (isExistOnListFlowsOfEachJoinNode(listFlowsOfEachJoinNode, otherFe))
+					continue;
+				if (!otherFe.getSource().getId().equalsIgnoreCase(fe.getSource().getId())
+						&& otherFe.getTarget().getId().equalsIgnoreCase(fe.getTarget().getId())) {
+					if (otherFe instanceof BasicFlowEdge && fe instanceof BasicFlowEdge)
+						listFlowEdges.add(otherFe);
+
+					if (otherFe instanceof AlternateFlowEdge && fe instanceof AlternateFlowEdge)
+						if (((AlternateFlowEdge) otherFe).getLabel()
+								.equalsIgnoreCase(((AlternateFlowEdge) fe).getLabel()))
+							listFlowEdges.add(otherFe);
 				}
 			}
+			if (listFlowEdges.size() > 0) {
+				listFlowEdges.add(fe);
+				listFlowsOfEachJoinNode.add(listFlowEdges);
+			}
+		}
+		for (List<FlowEdge> listFlowEdges : listFlowsOfEachJoinNode) {
+			JoinNode joinNode = new JoinNode();
+			String id = "JoinNode_between_";
+
+			FlowEdge feJoinNodeToOther = new FlowEdge();
+			feJoinNodeToOther.setSource(joinNode);
+			feJoinNodeToOther.setTarget(listFlowEdges.get(0).getTarget());
+			feJoinNodeToOther = CloneFactory.validateFlowEdgeType(feJoinNodeToOther);
+			metaModel.getFlowEdges().add(feJoinNodeToOther);
+
+			for (FlowEdge fe : listFlowEdges) {
+				fe.setTarget(joinNode);
+				id = id + fe.getSource().getId();
+			}
+			joinNode.setId(id);
 		}
 	};
 
+	private static boolean isExistOnListFlowsOfEachJoinNode(List<List<FlowEdge>> listFlowsOfEachJoinNode,
+			FlowEdge flowEdge) {
+		for (List<FlowEdge> listFlowEdges : listFlowsOfEachJoinNode) {
+			for (FlowEdge fe : listFlowEdges) {
+				if (flowEdge.getSource().getId().equalsIgnoreCase(fe.getSource().getId())
+						&& flowEdge.getTarget().getId().equalsIgnoreCase(fe.getTarget().getId()))
+					return true;
+			}
+		}
+		return false;
+	}
 }

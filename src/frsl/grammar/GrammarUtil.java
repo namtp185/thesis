@@ -16,6 +16,8 @@ public class GrammarUtil {
 
 	public static UseCase parseFromText(String text) {
 		try {
+			text = text.trim().replaceAll(" +", " ");
+			text = text.replaceAll("[\n]+", "\n");
 			ANTLRInputStream antlrInputStream = new ANTLRInputStream(text);
 			FRSLLexer lexer = new FRSLLexer(antlrInputStream);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);

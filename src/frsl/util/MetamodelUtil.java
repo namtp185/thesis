@@ -3,11 +3,11 @@ package frsl.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import frsl.metamodel.ControlNode;
 import frsl.metamodel.FlowEdge;
 import frsl.metamodel.FlowStep;
 import frsl.metamodel.USLNode;
 import frsl.metamodel.UseCase;
+import frsl.metamodel.control_node.ForkNode;
 import frsl.metamodel.flow_step.ActorStep;
 import frsl.metamodel.flow_step.SystemStep;
 
@@ -44,7 +44,7 @@ public class MetamodelUtil {
 			if (fs.getType().equalsIgnoreCase("Basic Flow")) {
 				stepName = stepName + fs.getName();
 			} else {
-				stepName = stepName + fs.getType() + fs.getName();
+				stepName = stepName + fs.getType().toLowerCase() + fs.getName();
 			}
 			if ((sentence.replace(".", " ").replace(",", " ")).contains(stepName + " ")) {
 				return stepName;
@@ -87,19 +87,52 @@ public class MetamodelUtil {
 		return null;
 	}
 
-	public static String findStepName(FlowStep fs, UseCase metaModel) {
-		String sentence = fs.getDescription().toLowerCase();
-		return isContainStepName(sentence, metaModel).replace("step", "").trim();
+	public static FlowEdge findFlowEdge(USLNode node, UseCase metaModel) {
+		for (FlowEdge flowEdge : metaModel.getFlowEdges()) {
+			if (flowEdge.getId().equalsIgnoreCase(node.getId()) || flowEdge.getId().equalsIgnoreCase(node.getId()))
+				return flowEdge;
+		}
+		return null;
 	}
 
-	public static boolean checkNodeIsTargetOfOneInFlowEdges(USLNode node, UseCase metaModel) {
+	public static String findStepName(FlowStep fs, UseCase metaModel) {
+		String sentence = fs.getDescription().toLowerCase();
+		String stepName = isContainStepName(sentence, metaModel);
+		if (stepName != null) {
+			stepName = stepName.replace("step", "").trim();
+		}
+		return stepName;
+	}
+
+	public static List<String> findListStepName(FlowStep fs, UseCase metaModel) {
+		List<String> rs = new ArrayList<String>();
+		String sentence = fs.getDescription().toLowerCase();
+		String stepName = isContainStepName(sentence, metaModel);
+		if (stepName != null) {
+			stepName = stepName.replace("step", "").trim();
+		}
+		while (stepName != null) {
+			rs.add(stepName);
+			sentence = sentence.replace(stepName, "");
+			stepName = isContainStepName(sentence, metaModel);
+			if (stepName != null) {
+				stepName = stepName.replace("step", "").trim();
+			}
+		}
+		return rs;
+	}
+
+	public static boolean isTargetOfOneInFlowEdges(USLNode node, UseCase metaModel) {
 		for (FlowEdge fe : metaModel.getFlowEdges()) {
-			if (fe.getTarget() instanceof FlowStep && node instanceof FlowStep
-					&& ((FlowStep) fe.getTarget()).getType().equalsIgnoreCase(((FlowStep) node).getType())
-					&& ((FlowStep) fe.getTarget()).getName().equalsIgnoreCase(((FlowStep) node).getName()))
+			if (fe.getTarget().getId().equalsIgnoreCase(node.getId()))
 				return true;
-			if (fe.getTarget() instanceof ControlNode && node instanceof ControlNode && ((ControlNode) fe.getTarget())
-					.getDescription().equalsIgnoreCase(((ControlNode) node).getDescription()))
+		}
+		return false;
+	}
+
+	public static boolean isSourceOfOneInFlowEdges(USLNode node, UseCase metaModel) {
+		for (FlowEdge fe : metaModel.getFlowEdges()) {
+			if (fe.getSource().getId().equalsIgnoreCase(node.getId()))
 				return true;
 		}
 		return false;
@@ -113,4 +146,39 @@ public class MetamodelUtil {
 		}
 		return false;
 	}
+
+	public static boolean isConcurentlyRunning(USLNode node1, USLNode node2, UseCase metaModel) {
+		String forkNodeId = null;
+		for (FlowEdge fe : metaModel.getFlowEdges()) {
+			if (fe.getSource() instanceof ForkNode && fe.getTarget().getId().equalsIgnoreCase(node1.getId())) {
+				forkNodeId = fe.getSource().getId();
+			}
+		}
+		if (forkNodeId == null) {
+			return false;
+		} else {
+			for (FlowEdge fe : metaModel.getFlowEdges()) {
+				if (fe.getSource().getId().equalsIgnoreCase(forkNodeId)
+						&& fe.getTarget().getId().equalsIgnoreCase(node2.getId())) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+//	private static boolean isOnSameFlow(USLNode node1, USLNode node2, UseCase metaModel) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	private static List<String> findListParentForkNode(USLNode node, UseCase metaModel) {
+//		List<String> rs = new ArrayList<String>();
+//		for (FlowEdge fe : metaModel.getFlowEdges()) {
+//			if(fe.getTarget() instanceof ForkNode && isChildOfFlowEdge(node,fe,metaModel)) {
+//				rs.add(fe.getSource().getId());
+//			}
+//		}
+//		return rs;
+//	}
 }
