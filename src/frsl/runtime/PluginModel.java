@@ -17,7 +17,6 @@ public class PluginModel {
 
 	private Vector<PluginActionModel> actions = null;
 	private Vector<PluginServiceModel> services = null;
-//	private Vector<PluginShellCmdModel> commands = null;
 
 	/**
 	 * Method to get the Plugin Action information
@@ -30,18 +29,6 @@ public class PluginModel {
 		}
 		return this.actions;
 	}
-
-//	/**
-//	 * Method to get the Plugin Shell Command information
-//	 * 
-//	 * @return a Vector of Plugin Shell Command Descriptors
-//	 */
-//	public Vector<PluginShellCmdModel> getCommands() {
-//		if (this.commands == null) {
-//			this.commands = new Vector<PluginShellCmdModel>();
-//		}
-//		return this.commands;
-//	}
 
 	/**
 	 * Method to get the Plugin's id.

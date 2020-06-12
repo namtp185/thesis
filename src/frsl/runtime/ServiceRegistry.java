@@ -1,11 +1,5 @@
 package frsl.runtime;
 
-//import org.tzi.use.runtime.IPluginDescriptor;
-//import org.tzi.use.runtime.model.PluginServiceModel;
-//import org.tzi.use.runtime.service.IPluginServiceDescriptor;
-//import org.tzi.use.runtime.service.impl.PluginServiceDescriptor;
-//import org.tzi.use.util.Log;
-
 /**
  * The Service Registry.
  * 

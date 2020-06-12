@@ -4,13 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 
-//import org.tzi.use.runtime.IPlugin;
-//import org.tzi.use.runtime.IPluginClassLoader;
-//import org.tzi.use.runtime.IPluginDescriptor;
-//import org.tzi.use.runtime.model.PluginModel;
-//import org.tzi.use.runtime.util.PluginClassLoader;
-//import org.tzi.use.util.Log;
-
 /**
  * The Plugin Descriptor class.
  * 
@@ -30,10 +23,8 @@ public class PluginDescriptor implements IPluginDescriptor {
 	 * Construktor creating a PluginDescriptor with the given Plugin Model and
 	 * Plugin location path
 	 * 
-	 * @param pluginModel
-	 *            The Plugin Model object
-	 * @param location
-	 *            The Plugin location path as URL
+	 * @param pluginModel The Plugin Model object
+	 * @param location    The Plugin location path as URL
 	 */
 	public PluginDescriptor(PluginModel pluginModel, URL location) {
 		this.pluginModel = pluginModel;
@@ -48,32 +39,24 @@ public class PluginDescriptor implements IPluginDescriptor {
 				IPluginClassLoader pluginClassLoader = getPluginClassLoader();
 				className = pluginClassLoader.getMainClassName();
 				try {
-					this.plugin = (IPlugin) pluginClassLoader.loadClass(
-							className).getDeclaredConstructor().newInstance();
+					this.plugin = (IPlugin) pluginClassLoader.loadClass(className).getDeclaredConstructor()
+							.newInstance();
 				} catch (ClassNotFoundException cnfe) {
 					Log.error("No plugin class [" + className + "]: ", cnfe);
 				} catch (InstantiationException ie) {
-					Log.error(
-							"Could not instantiate class [" + className + "]",
-							ie);
+					Log.error("Could not instantiate class [" + className + "]", ie);
 				} catch (IllegalAccessException iae) {
-					Log
-							.error(
-									"Could not access class [" + className
-											+ "]", iae);
-				} catch(InvocationTargetException ite) {
+					Log.error("Could not access class [" + className + "]", iae);
+				} catch (InvocationTargetException ite) {
 					Log.error("InvocationTargetException [" + className + "]: ", ite);
-				} catch(NoSuchMethodException nsme) {
+				} catch (NoSuchMethodException nsme) {
 					Log.error("Method not found for [" + className + "]: ", nsme);
 				}
 				if (this.plugin == null) {
 					Log.error("PD, Could not get class [" + className + "]");
 				}
 			} catch (IOException ioe) {
-				Log
-						.error(
-								"No plugin file [" + this.pluginLocation
-										+ "]: ", ioe);
+				Log.error("No plugin file [" + this.pluginLocation + "]: ", ioe);
 			}
 		}
 		return this.plugin;
@@ -83,10 +66,9 @@ public class PluginDescriptor implements IPluginDescriptor {
 		if (this.classLoader == null) {
 			this.classLoader = new PluginClassLoader(getPluginLocation());
 		}
-		Log.debug("PluginDescriptor classLoader [" + this.pluginModel.getName()
-				+ "]" + ", " + "[" + this.classLoader.toString() + "]");
-		Log.debug("PluginDescriptor ContextClassLoader ["
-				+ Thread.currentThread().getContextClassLoader().toString()
+		Log.debug("PluginDescriptor classLoader [" + this.pluginModel.getName() + "]" + ", " + "["
+				+ this.classLoader.toString() + "]");
+		Log.debug("PluginDescriptor ContextClassLoader [" + Thread.currentThread().getContextClassLoader().toString()
 				+ "]");
 		return this.classLoader;
 	}

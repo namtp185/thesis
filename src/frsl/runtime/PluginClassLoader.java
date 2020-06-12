@@ -7,7 +7,6 @@ import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.jar.Attributes;
 
-//import org.tzi.use.runtime.IPluginClassLoader;
 
 /**
  * This class provides the Plugin ClassLoader.
