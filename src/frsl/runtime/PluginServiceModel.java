@@ -41,8 +41,7 @@ public class PluginServiceModel {
 	/**
 	 * Method to set the Plugin Service id.
 	 * 
-	 * @param id
-	 *            The Plugin Service id
+	 * @param id The Plugin Service id
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -51,8 +50,7 @@ public class PluginServiceModel {
 	/**
 	 * Method to set the Plugin Service name.
 	 * 
-	 * @param name
-	 *            The Plugin Service name
+	 * @param name The Plugin Service name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -61,8 +59,7 @@ public class PluginServiceModel {
 	/**
 	 * Method to set the Plugin Service class name.
 	 * 
-	 * @param serviceClass
-	 *            The Plugin Service class name
+	 * @param serviceClass The Plugin Service class name
 	 */
 	public void setServiceClass(String serviceClass) {
 		this.serviceClass = serviceClass;
