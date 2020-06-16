@@ -35,7 +35,6 @@ import frsl.runtime.IRuntime;
 import frsl.runtime.Log;
 import frsl.runtime.PluginActionProxy;
 import frsl.runtime.RuntimeUtil;
-import frsl.util.IOUtil;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
