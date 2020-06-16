@@ -39,7 +39,7 @@ public class PluginRegistry {
 	private PluginRegistry() {
 	}
 
-	private static final String PLUGINXML = "useplugin.xml";
+	private static final String PLUGINXML = "frslplugin.xml";
 
 	private IPluginDescriptor createPluginDescriptor(PluginModel pluginModel,
 			URL location) {
