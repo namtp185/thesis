@@ -198,6 +198,7 @@ public class MainWindow extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			metaModel = GrammarUtil.parseFromText(FRSLSpecificationTextEditor.getFrslSpecificationText());
+			
 			if (metaModel == null) {
 				JOptionPane.showMessageDialog(null, "Compilation failed", "Compiler", JOptionPane.ERROR_MESSAGE);
 			} else {

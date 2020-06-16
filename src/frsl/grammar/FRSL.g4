@@ -23,13 +23,6 @@ alternativeFlow: aFlow ':' PHRASE (basicStep|NEWLINE)+;
 step: 'Step ' LETTER ;
 aFlow: 'Flow ' LETTER ;
 
-
-// key
-USECASE: 'Use case:';
-DESCRIPTION: 'Brief description:';
-ACTORS: 'Actors:';
-FLOWS: 'Flows:';
-
 // segment
 NEWLINE: [\n]+;
 STATEMENT: (PHRASE|'.'|',')+'.';

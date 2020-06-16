@@ -19,8 +19,10 @@ public class SentenceTypeChecker {
 				return 2;
 			}
 			if ((sentence.contains("concurrently") || sentence.contains("concurrent"))
-					&& (sentence.contains("executing") || sentence.contains("execute") || sentence.contains(" do ")
-							|| sentence.contains(" does "))) {
+					&& (sentence.contains("executing") || sentence.contains("execute") 
+							|| sentence.contains("executes")
+							|| sentence.contains(" do ") || sentence.contains(" does ")
+							|| sentence.contains(" doing "))) {
 				// concurrent
 				return 3;
 			}
