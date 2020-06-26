@@ -16,7 +16,6 @@ public class PluginModel {
 	private String publisher = null;
 
 	private Vector<PluginActionModel> actions = null;
-	private Vector<PluginServiceModel> services = null;
 
 	/**
 	 * Method to get the Plugin Action information
@@ -66,43 +65,14 @@ public class PluginModel {
 		return this.publisher;
 	}
 
-	/**
-	 * Method to get the Plugin's
-	 * 
-	 * @return A Vector of Plugin Service Descriptors
-	 */
-	public Vector<PluginServiceModel> getServices() {
-		if (this.services == null) {
-			this.services = new Vector<PluginServiceModel>();
-		}
-		return services;
-	}
-
-	/**
-	 * Method to get the Plugin's Version
-	 * 
-	 * @return The Plugin's version
-	 */
 	public String getVersion() {
 		return version;
 	}
 	
-	/**
-	 * Method to set the Plugin's id.
-	 * 
-	 * @param id
-	 *            The Plugin's id
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * Method to set the Plugin's name.
-	 * 
-	 * @param name
-	 *            The Plugin's name
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}

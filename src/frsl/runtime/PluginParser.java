@@ -74,31 +74,6 @@ public class PluginParser extends DefaultHandler implements
 		Log.debug("PluginParser: Leaving handlePluginAction.");
 	}
 
-	public void handlePluginCommands(String qName, Attributes attributes) {
-		Log.debug("PluginParser: Entering handlePluginCommands.");
-		Log.debug("PluginParser: element=[" + qName + "]");
-		if (qName.equals(PLUGIN_COMMAND)) {
-			Log.debug("PluginParser:  attributes counted ["
-					+ attributes.getLength() + "]");
-			parsePluginCmdAttributes(attributes);
-		} else {
-			Log.debug("PluginParser: handlePluginCommand  at " + qName);
-		}
-		Log.debug("PluginParser: Leaving handlePluginCommand.");
-	}
-
-	public void handlePluginService(String qName, Attributes attributes) {
-		Log.debug("PluginParser: Entering handlePluginService.");
-		Log.debug("PluginParser: element=[" + qName + "]");
-		if (qName.equals(PLUGIN_SERVICE)) {
-			Log.debug("PluginParser:  attributes counted ["
-					+ attributes.getLength() + "]");
-			parsePluginServiceAttributes(attributes);
-		} else {
-			Log.debug("PluginParser: handlePluginService  at " + qName);
-		}
-		Log.debug("PluginParser: Leaving handlePluginService.");
-	}
 
 	private void internalError(String position, String attribute) {
 		System.out.println("Parse error at position " + position
@@ -197,81 +172,6 @@ public class PluginParser extends DefaultHandler implements
 		Log.debug("PluginParser: Leaving parsePlugin.");
 	}
 
-	public void parsePluginCmdAttributes(Attributes attributes) {
-
-//		PluginShellCmdModel command = new PluginShellCmdModel();
-//
-//		PluginModel current = this.pluginDesciptors.pop();
-//		Vector<PluginShellCmdModel> commands = current.getCommands();
-//
-//		Log.debug("PluginParser: Entering parsePluginCmd.");
-//		// process attributes
-//		int len = attributes.getLength();
-//		Log.debug("PluginParser: parsePluginCmd counted attributes ["
-//				+ attributes.getLength() + "]");
-//		for (int i = 0; i < len; i++) {
-//			String attrName = attributes.getQName(i);
-//			String attrValue = attributes.getValue(attrName);
-//			Log.debug("PluginParser: " + attrName + " found.");
-//			if (attrName.equals(PLUGIN_COMMAND_ID)) {
-//				command.setId(attrValue);
-//				Log.debug("Setting " + attrName);
-//			} else if (attrName.equals(PLUGIN_COMMAND_LABEL)) {
-//				command.setLabel(attrValue);
-//				Log.debug("Setting " + attrName);
-//			} else if (attrName.equals(PLUGIN_COMMAND_CLASS)) {
-//				command.setCmdClass(attrValue);
-//				Log.debug("Setting " + attrName);
-//			} else if (attrName.equals(PLUGIN_COMMAND_SHELLCMD)) {
-//				command.setShellCmd(attrValue);
-//				Log.debug("Setting " + attrName);
-//			} else if (attrName.equals(PLUGIN_COMMAND_ALIAS)) {
-//				command.setAlias(attrValue);
-//				Log.debug("Setting " + attrName);
-//			} else if (attrName.equals(PLUGIN_COMMAND_HELP)) {
-//				command.setCmdHelp(attrValue);
-//				Log.debug("Setting " + attrName);
-//			} else
-//				internalError(PLUGIN, attrName);
-//		}
-//		commands.add(command);
-//		this.pluginDesciptors.push(current);
-		Log.debug("PluginParser: Leaving parsePluginCmd.");
-	}
-
-	public void parsePluginServiceAttributes(Attributes attributes) {
-
-		PluginServiceModel service = new PluginServiceModel();
-
-		PluginModel current = this.pluginDesciptors.pop();
-		Vector<PluginServiceModel> services = current.getServices();
-
-		Log.debug("PluginParser: Entering parsePluginService.");
-		// process attributes
-		int len = attributes.getLength();
-		Log.debug("PluginParser: parsePluginService counted attributes ["
-				+ attributes.getLength() + "]");
-		for (int i = 0; i < len; i++) {
-			String attrName = attributes.getQName(i);
-			String attrValue = attributes.getValue(attrName);
-			Log.debug("PluginParser: " + attrName + " found.");
-			if (attrName.equals(PLUGIN_SERVICE_ID)) {
-				service.setId(attrValue);
-				Log.debug("Setting " + attrName);
-			} else if (attrName.equals(PLUGIN_SERVICE_LABEL)) {
-				service.setName(attrValue);
-				Log.debug("Setting " + attrName);
-			} else if (attrName.equals(PLUGIN_SERVICE_CLASS)) {
-				service.setServiceClass(attrValue);
-				Log.debug("Setting " + attrName);
-			} else
-				internalError(PLUGIN, attrName);
-		}
-		services.add(service);
-		this.pluginDesciptors.push(current);
-		Log.debug("PluginParser: Leaving parsePluginService.");
-	}
-
 	public void startDocument() throws SAXException {
 		Log.debug("PluginParser: Touching startDocument.");
 	}
@@ -283,8 +183,6 @@ public class PluginParser extends DefaultHandler implements
 				+ attributes.getLength() + "]");
 		handlePlugin(qName, attributes);
 		handlePluginAction(qName, attributes);
-		handlePluginService(qName, attributes);
-		handlePluginCommands(qName, attributes);
 		Log.debug("PluginParser: Leaving startElement.");
 	}
 

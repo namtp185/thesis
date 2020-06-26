@@ -70,8 +70,6 @@ public class MainPluginRuntime {
 				.getExtensionPoint("action");
 
 		for (IPluginDescriptor currentPluginDescriptor : pluginRuntime.getPlugins().values()) {
-			Log.debug("Main: Registering services");
-			pluginRuntime.registerServices(currentPluginDescriptor);
 			Log.debug("Main: Registering actions");
 			actionExtensionPoint.registerActions(currentPluginDescriptor);
 		}
