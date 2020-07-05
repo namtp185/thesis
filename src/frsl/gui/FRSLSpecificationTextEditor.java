@@ -42,7 +42,11 @@ public class FRSLSpecificationTextEditor extends JPanel {
 		DefaultCompletionProvider provider = new DefaultCompletionProvider();
 		String[] listKeyWord = { "UseCase : ", "BriefDescription : ", "Actors : ", "Precondition : ",
 				"Postcondition : ", "Trigger : ", "SpecialRequirement : ", "BasicFlow : ", "AlternativeFlows : ",
-				"Flow ", "Step " };
+				"Flow ", "Step ", "go ", "goes ", "going ", "to ", "If ", "if ", "then ", "else ", "concurrent ",
+				"concurrently ", "executing ", "execute ", "do ", "does ", "doing ", "While ", "while ", "Until ",
+				"until "
+
+		};
 		for (String keyWord : listKeyWord) {
 			provider.addCompletion(new BasicCompletion(provider, keyWord));
 		}

@@ -4,13 +4,15 @@ import java.util.Map;
 import java.util.Vector;
 
 import frsl.gui.MainWindow;
+import frsl.runtime.itf.IDescriptor;
+import frsl.runtime.itf.IPluginActionDescriptor;
+import frsl.runtime.itf.IPluginActionExtensionPoint;
+import frsl.runtime.itf.IPluginDescriptor;
 
 
 /**
  * This class provides the implementation of the Action Extension Point.The
  * referenced interface should be located in the application elsewhere.
- * 
- * @author Roman Asendorf
  */
 public class ActionExtensionPoint implements IPluginActionExtensionPoint {
 
@@ -18,16 +20,11 @@ public class ActionExtensionPoint implements IPluginActionExtensionPoint {
 
 	/**
 	 * Method returning the Singleton instance of the ActionExtensionPoint
-	 * 
-	 * @return The ActionExtensionPoint instance
 	 */
 	public static IPluginActionExtensionPoint getInstance() {
 		return instance;
 	}
 
-	/**
-	 * Private default Constructor.
-	 */
 	private ActionExtensionPoint() {
 	}
 

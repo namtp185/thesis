@@ -19,13 +19,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import frsl.runtime.itf.IPluginParserSymbols;
+
 /**
  * The Plugin Parser class. This class uses the Plugin Parser Symbols provided
  * by the PluginParserSymbols interface. While parsing the XML declaration file
  * this class creates the additional Plugin Service, Action and Shell Command
  * Descriptors if nessecary.
- * 
- * @author Roman Asendorf
  */
 public class PluginParser extends DefaultHandler implements
 		IPluginParserSymbols {

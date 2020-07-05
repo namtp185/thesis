@@ -3,6 +3,8 @@ package frsl.runtime;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import frsl.runtime.itf.IRuntime;
+
 public class RuntimeUtil {
 	public static IRuntime loadPlugin() {
 		IRuntime pluginRuntime = null;

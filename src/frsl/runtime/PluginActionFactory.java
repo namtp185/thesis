@@ -5,13 +5,11 @@ import java.util.Map;
 import java.util.Vector;
 
 import frsl.gui.MainWindow;
+import frsl.runtime.itf.IPluginActionDescriptor;
 
 
 /**
- * This class provides the Plugin Action Proxy Factory to create Plugin Action
- * Proxies.
- * 
- * @author Roman Asendorf
+ * This class provides the Plugin Action Proxy Factory to create Plugin Action Proxies.
  */
 
 public class PluginActionFactory {
@@ -20,29 +18,16 @@ public class PluginActionFactory {
 
 	/**
 	 * Method returning the Singleton instance of the PluginActionFactory
-	 * 
-	 * @return The PluginActionFactory instance
 	 */
 	public static PluginActionFactory getInstance() {
 		return instance;
 	}
 
-	/**
-	 * Private default constructor
-	 */
 	private PluginActionFactory() {
 	}
 
 	/**
 	 * Method to create the Plugin Action Proxies.
-	 * 
-	 * @param actions
-	 *            The Plugin Action Descriptors
-	 * @param session
-	 *            The application's Session object
-	 * @param mainWindow
-	 *            The application's MainWindow object
-	 * @return A Map of Plugin Action Proxies
 	 */
 	public Map<Map<String, String>, PluginActionProxy> createPluginActions(Vector<IPluginActionDescriptor> actions,
 			MainWindow mainWindow) {

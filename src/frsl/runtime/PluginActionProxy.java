@@ -7,40 +7,30 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import frsl.gui.MainWindow;
-
+import frsl.runtime.itf.IPluginActionDescriptor;
 
 /**
  * This Plugin Action Proxy class.
- * 
- * @author Roman Asendorf
  */
 public class PluginActionProxy extends PluginAction {
 
-	/**
-	 * Serial for this class.
-	 */
 	private static final long serialVersionUID = -8929195916819522778L;
 
-	private static String createActionName(
-			IPluginActionDescriptor pluginActionDescriptor) {
+	private static String createActionName(IPluginActionDescriptor pluginActionDescriptor) {
 		return pluginActionDescriptor.getPluginActionModel().getMenuitem();
 	}
 
-	private static ImageIcon createImageIcon(
-			IPluginActionDescriptor pluginActionDescriptor) {
+	private static ImageIcon createImageIcon(IPluginActionDescriptor pluginActionDescriptor) {
 		String fallBackImage = "";
 		URL imageUrl = null;
-		String urlString = "jar:"
-			+ pluginActionDescriptor.getParent().getPluginLocation()
-			+ "!/" // + System.getProperty("file.separator")
-			+ pluginActionDescriptor.getPluginActionModel().getIcon();
-		
-		try {	
+		String urlString = "jar:" + pluginActionDescriptor.getParent().getPluginLocation() + "!/" // +
+																									// System.getProperty("file.separator")
+				+ pluginActionDescriptor.getPluginActionModel().getIcon();
+
+		try {
 			imageUrl = new URL(urlString);
 		} catch (MalformedURLException e) {
-			Log.error("The URL to the image ["
-					+ urlString
-					+ "] was malformed!");
+			Log.error("The URL to the image [" + urlString + "] was malformed!");
 		}
 		if (imageUrl == null) {
 			Log.debug("Creating fallBack ImageIcon [" + fallBackImage + "]");
@@ -49,8 +39,7 @@ public class PluginActionProxy extends PluginAction {
 		try {
 			imageUrl.getContent();
 		} catch (IOException ioe) {
-			Log.error("Could not find image at the given URL [" + imageUrl
-					+ "] .");
+			Log.error("Could not find image at the given URL [" + imageUrl + "] .");
 			Log.debug("Creating fallBack ImageIcon [" + fallBackImage + "]");
 			return new ImageIcon(fallBackImage);
 		}
@@ -60,20 +49,11 @@ public class PluginActionProxy extends PluginAction {
 	}
 
 	/**
-	 * Constructor creating a Plugin Action Proxy from the given Plugin Action
-	 * Descriptor
-	 * 
-	 * @param pluginActionDescriptor
-	 * @param session
-	 *            The Session object
-	 * @param parent
-	 *            The MainWindow object as parent
+	 * Constructor creating a Plugin Action Proxy from the given Plugin Action Descriptor
 	 */
-	public PluginActionProxy(IPluginActionDescriptor pluginActionDescriptor,
-			MainWindow parent) {
+	public PluginActionProxy(IPluginActionDescriptor pluginActionDescriptor, MainWindow parent) {
 
-		super(pluginActionDescriptor, parent,
-				createActionName(pluginActionDescriptor),
+		super(pluginActionDescriptor, parent, createActionName(pluginActionDescriptor),
 				createImageIcon(pluginActionDescriptor));
 	}
 }

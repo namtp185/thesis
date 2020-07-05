@@ -7,12 +7,11 @@ import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.jar.Attributes;
 
+import frsl.runtime.itf.IPluginClassLoader;
+
 
 /**
  * This class provides the Plugin ClassLoader.
- * 
- * @author Roman Asendorf
- * @author (Modified for Java 9 by Andreas Kaestner)
  */
 public class PluginClassLoader implements IPluginClassLoader {
 	/** This URLClassLoader can load all current plugin classes */
@@ -21,11 +20,7 @@ public class PluginClassLoader implements IPluginClassLoader {
 	private final URL url;
 
 	/**
-	 * Constructor creating a Plugin ClassLoader with the given location path as
-	 * URL.
-	 * 
-	 * @param location
-	 *            Plugin location path.
+	 * Constructor creating a Plugin ClassLoader with the given location path as URL.
 	 */
 	public PluginClassLoader(URL location) {
 		if (classLoader == null) {
@@ -44,8 +39,6 @@ public class PluginClassLoader implements IPluginClassLoader {
 
 	/**
 	 * Method returing the Plugin ClassLoder instance.
-	 * 
-	 * @return The Plugin ClassLoader instance.
 	 */
 	public PluginClassLoader getClassLoader() {
 		return this;

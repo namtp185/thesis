@@ -30,11 +30,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import frsl.grammar.GrammarUtil;
 import frsl.metamodel.UseCase;
-import frsl.runtime.IPluginActionExtensionPoint;
-import frsl.runtime.IRuntime;
 import frsl.runtime.Log;
 import frsl.runtime.PluginActionProxy;
 import frsl.runtime.RuntimeUtil;
+import frsl.runtime.itf.IPluginActionExtensionPoint;
+import frsl.runtime.itf.IRuntime;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {

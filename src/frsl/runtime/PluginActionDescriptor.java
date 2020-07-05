@@ -2,10 +2,13 @@ package frsl.runtime;
 
 import java.lang.reflect.InvocationTargetException;
 
+import frsl.runtime.itf.IPluginActionDelegate;
+import frsl.runtime.itf.IPluginActionDescriptor;
+import frsl.runtime.itf.IPluginClassLoader;
+import frsl.runtime.itf.IPluginDescriptor;
+
 /**
  * This class provides the implementation of the Plugin Action Descriptor.
- * 
- * @author Roman Asendorf
  */
 public class PluginActionDescriptor implements IPluginActionDescriptor {
 
@@ -20,13 +23,6 @@ public class PluginActionDescriptor implements IPluginActionDescriptor {
 	/**
 	 * Constructor to create a Plugin Action Descriptor with the given Plugin
 	 * Action Model and Plugin ClassLoader.
-	 * 
-	 * @param pluginActionModel
-	 *            The Plugin Action Model object
-	 * @param pluginClassLoader
-	 *            The Plugin ClassLoader
-	 * @param parent
-	 *            The Plugin Action's parent Window object
 	 */
 	public PluginActionDescriptor(PluginActionModel pluginActionModel,
 			IPluginClassLoader pluginClassLoader, IPluginDescriptor parent) {

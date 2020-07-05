@@ -5,17 +5,16 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Roman Asendorf
- */
+import frsl.runtime.itf.IExtensionPoint;
+import frsl.runtime.itf.IPluginDescriptor;
+import frsl.runtime.itf.IPluginRuntime;
+
 public class PluginRuntime implements IPluginRuntime {
 
 	private static IPluginRuntime instance = new PluginRuntime();
 
 	/**
 	 * Method returning the Singleton instance of the PluginRuntime
-	 * 
-	 * @return The PluginRuntime instance.
 	 */
 	public static IPluginRuntime getInstance() {
 		return instance;
@@ -32,9 +31,6 @@ public class PluginRuntime implements IPluginRuntime {
 
 	/**
 	 * Method to get a Plugin by it's name.
-	 * 
-	 * @param pluginName The Plugin's name.
-	 * @return The plugin descriptor
 	 */
 	public IPluginDescriptor getPlugin(String pluginName) {
 		return this.registeredPlugins.get(pluginName);

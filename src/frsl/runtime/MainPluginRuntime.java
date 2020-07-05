@@ -5,11 +5,14 @@ import java.io.FilenameFilter;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 
+import frsl.runtime.itf.IPluginActionExtensionPoint;
+import frsl.runtime.itf.IPluginDescriptor;
+import frsl.runtime.itf.IPluginRuntime;
+import frsl.runtime.itf.IRuntime;
+
 /**
  * This is the Plugin Runtime's main class. It will be called from the USE main
  * class if the Plugin Framework is enabled.
- * 
- * @author Roman Asendorf
  */
 public class MainPluginRuntime {
 
@@ -24,9 +27,6 @@ public class MainPluginRuntime {
 
 	/**
 	 * Method to get all filename with jar-extension in the given location.
-	 * 
-	 * @param location The Plugin location path
-	 * @return Array of jar-filenames
 	 */
 	private static String[] getJarFileNames(Path pluginDirURL) {
 
@@ -46,9 +46,6 @@ public class MainPluginRuntime {
 
 	/**
 	 * Method to startup the Plugin Runtime using the given location path.
-	 * 
-	 * @param pluginDirURL The Plugin location path
-	 * @return The Plugin Runtime object
 	 */
 	public static IRuntime run(Path pluginDirURL) {
 

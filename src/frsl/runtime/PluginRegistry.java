@@ -15,10 +15,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import frsl.runtime.itf.IPluginDescriptor;
+
 /**
- * The Plugin Registry class registers the Plugins. It
- * 
- * @author Roman Asendorf
+ * The Plugin Registry class registers the Plugins.
  */
 public class PluginRegistry {
 
@@ -26,23 +26,17 @@ public class PluginRegistry {
 
 	/**
 	 * Method returning the Singleton instance of the PluginRegistry
-	 * 
-	 * @return The PluginRegistry instance
 	 */
 	public static PluginRegistry getInstance() {
 		return instance;
 	}
 
-	/**
-	 * Private default constructor
-	 */
 	private PluginRegistry() {
 	}
 
 	private static final String PLUGINXML = "frslplugin.xml";
 
-	private IPluginDescriptor createPluginDescriptor(PluginModel pluginModel,
-			URL location) {
+	private IPluginDescriptor createPluginDescriptor(PluginModel pluginModel, URL location) {
 		IPluginDescriptor pluginDescriptor = null;
 		try {
 			pluginDescriptor = new PluginDescriptor(pluginModel, location);
@@ -56,10 +50,11 @@ public class PluginRegistry {
 
 		PluginModel pluginModel = null;
 		File pluginFile = new File(location.getFile());
-		
-		try (JarFile jarFile = new JarFile(pluginFile); InputStream inputStream = jarFile.getInputStream(jarFile.getEntry(PLUGINXML))){
+
+		try (JarFile jarFile = new JarFile(pluginFile);
+				InputStream inputStream = jarFile.getInputStream(jarFile.getEntry(PLUGINXML))) {
 			Log.debug("Creating jarfile path: [" + pluginFile + "]");
-			
+
 			InputSource inputSource = new InputSource(inputStream);
 			Log.debug("Creating plugin for: " + pluginFile);
 			pluginModel = new PluginParser().parsePlugin(inputSource);
@@ -73,10 +68,6 @@ public class PluginRegistry {
 
 	/**
 	 * Method to register a Plugin in the given plugin location path.
-	 * 
-	 * @param location
-	 *            The plugin location path
-	 * @return The Plugin Descriptor of the registered Plugin
 	 */
 	public IPluginDescriptor registerPlugin(URL location) {
 
@@ -91,11 +82,9 @@ public class PluginRegistry {
 		}
 		Log.debug("Plugin [" + pluginModel.getName() + "] found.");
 
-		IPluginDescriptor pluginDescriptor = createPluginDescriptor(
-				pluginModel, location);
+		IPluginDescriptor pluginDescriptor = createPluginDescriptor(pluginModel, location);
 		if (pluginDescriptor == null) {
-			Log.error("Could not create a PluginDescriptor for plugin ["
-					+ pluginModel.getName() + "]");
+			Log.error("Could not create a PluginDescriptor for plugin [" + pluginModel.getName() + "]");
 			return null;
 		}
 		Log.debug("PluginDescriptor created.");

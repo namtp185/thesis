@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 
-/**
- * The Plugin Descriptor class.
- * 
- * @author Roman Asendorf
- */
+import frsl.runtime.itf.IPlugin;
+import frsl.runtime.itf.IPluginClassLoader;
+import frsl.runtime.itf.IPluginDescriptor;
+
 public class PluginDescriptor implements IPluginDescriptor {
 
 	private IPlugin plugin = null;
@@ -22,9 +21,6 @@ public class PluginDescriptor implements IPluginDescriptor {
 	/**
 	 * Construktor creating a PluginDescriptor with the given Plugin Model and
 	 * Plugin location path
-	 * 
-	 * @param pluginModel The Plugin Model object
-	 * @param location    The Plugin location path as URL
 	 */
 	public PluginDescriptor(PluginModel pluginModel, URL location) {
 		this.pluginModel = pluginModel;

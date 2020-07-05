@@ -171,7 +171,7 @@ public class FRSLWalker extends FRSLBaseListener {
 						FlowEdge fe = new FlowEdge();
 						fe.setSource(preNode);
 						fe.setTarget(fs);
-						if(preNode instanceof DecisionNode)
+						if (preNode instanceof DecisionNode)
 							fe.setGuard(new Contraint("false"));
 						fe = CloneFactory.validateFlowEdgeType(fe);
 						metaModel.getFlowEdges().add(fe);
@@ -180,7 +180,7 @@ public class FRSLWalker extends FRSLBaseListener {
 					}
 				}
 				int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
-				System.out.println("Type " + type + " : " + fs.getDescription());
+//				System.out.println("Type " + type + " : " + fs.getDescription());
 				switch (type) {
 				case 0:
 					// normal
@@ -250,7 +250,6 @@ public class FRSLWalker extends FRSLBaseListener {
 					break;
 				case 2:
 					// iteration
-					// has not been processed yet
 					preNode = null;
 					break;
 				case 3:
