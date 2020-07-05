@@ -14,15 +14,18 @@ public class KeywordsHighlighting extends AbstractTokenMaker {
 	public TokenMap getWordsToHighlight() {
 		TokenMap tokenMap = new TokenMap();
 
-		String[] listKeyWord = { "UseCase", "BriefDescription", "Actors", "Precondition", "Postcondition", "Trigger",
+		String[] listKeyWord1 = { "UseCase", "BriefDescription", "Actors", "Precondition", "Postcondition", "Trigger",
 				"SpecialRequirement", "BasicFlow", "AlternativeFlows", "Flow", "Step" };
-		for (String keyWord : listKeyWord) {
+		for (String keyWord : listKeyWord1) {
 			tokenMap.put(keyWord, RESERVED_WORD_2);
 		}
 
-//        tokenMap.put("printf", FUNCTION);
-//        tokenMap.put("scanf", FUNCTION);
-//        tokenMap.put("fopen", FUNCTION);
+		String[] listKeyWord2 = { "go", "goes", "going", "to", "If", "if", "then", "else", "concurrent", "concurrently",
+				"executing", "execute", "executes", "do", "does", "doing", "While", "while", "Until ", "until",
+				"system" };
+		for (String keyWord : listKeyWord2) {
+			tokenMap.put(keyWord, FUNCTION);
+		}
 
 		return tokenMap;
 	}
@@ -91,13 +94,13 @@ public class KeywordsHighlighting extends AbstractTokenMaker {
 					break;
 
 				default:
-					if (RSyntaxUtilities.isDigit(c)) {
-						currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT;
-						break;
-					} else if (RSyntaxUtilities.isLetter(c) || c == '/' || c == '_') {
-						currentTokenType = Token.IDENTIFIER;
-						break;
-					}
+//					if (RSyntaxUtilities.isDigit(c)) {
+//						currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT;
+//						break;
+//					} else if (RSyntaxUtilities.isLetter(c) || c == '/' || c == '_') {
+//						currentTokenType = Token.IDENTIFIER;
+//						break;
+//					}
 
 					// Anything not currently handled - mark as an identifier
 					currentTokenType = Token.IDENTIFIER;
@@ -132,13 +135,13 @@ public class KeywordsHighlighting extends AbstractTokenMaker {
 					addToken(text, currentTokenStart, i - 1, Token.WHITESPACE, newStartOffset + currentTokenStart);
 					currentTokenStart = i;
 
-					if (RSyntaxUtilities.isDigit(c)) {
-						currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT;
-						break;
-					} else if (RSyntaxUtilities.isLetter(c) || c == '/' || c == '_') {
-						currentTokenType = Token.IDENTIFIER;
-						break;
-					}
+//					if (RSyntaxUtilities.isDigit(c)) {
+//						currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT;
+//						break;
+//					} else if (RSyntaxUtilities.isLetter(c) || c == '/' || c == '_') {
+//						currentTokenType = Token.IDENTIFIER;
+//						break;
+//					}
 
 					// Anything not currently handled - mark as identifier
 					currentTokenType = Token.IDENTIFIER;
@@ -175,40 +178,40 @@ public class KeywordsHighlighting extends AbstractTokenMaker {
 
 				break;
 
-			case Token.LITERAL_NUMBER_DECIMAL_INT:
-
-				switch (c) {
-
-				case ' ':
-				case '\t':
-					addToken(text, currentTokenStart, i - 1, Token.LITERAL_NUMBER_DECIMAL_INT,
-							newStartOffset + currentTokenStart);
-					currentTokenStart = i;
-					currentTokenType = Token.WHITESPACE;
-					break;
-
-				case '"':
-					addToken(text, currentTokenStart, i - 1, Token.LITERAL_NUMBER_DECIMAL_INT,
-							newStartOffset + currentTokenStart);
-					currentTokenStart = i;
-					currentTokenType = Token.LITERAL_STRING_DOUBLE_QUOTE;
-					break;
-
-				default:
-
-					if (RSyntaxUtilities.isDigit(c)) {
-						break; // Still a literal number.
-					}
-
-					// Otherwise, remember this was a number and start over.
-					addToken(text, currentTokenStart, i - 1, Token.LITERAL_NUMBER_DECIMAL_INT,
-							newStartOffset + currentTokenStart);
-					i--;
-					currentTokenType = Token.NULL;
-
-				} // End of switch (c).
-
-				break;
+//			case Token.LITERAL_NUMBER_DECIMAL_INT:
+//
+//				switch (c) {
+//
+//				case ' ':
+//				case '\t':
+//					addToken(text, currentTokenStart, i - 1, Token.LITERAL_NUMBER_DECIMAL_INT,
+//							newStartOffset + currentTokenStart);
+//					currentTokenStart = i;
+//					currentTokenType = Token.WHITESPACE;
+//					break;
+//
+//				case '"':
+//					addToken(text, currentTokenStart, i - 1, Token.LITERAL_NUMBER_DECIMAL_INT,
+//							newStartOffset + currentTokenStart);
+//					currentTokenStart = i;
+//					currentTokenType = Token.LITERAL_STRING_DOUBLE_QUOTE;
+//					break;
+//
+//				default:
+//
+//					if (RSyntaxUtilities.isDigit(c)) {
+//						break; // Still a literal number.
+//					}
+//
+//					// Otherwise, remember this was a number and start over.
+//					addToken(text, currentTokenStart, i - 1, Token.LITERAL_NUMBER_DECIMAL_INT,
+//							newStartOffset + currentTokenStart);
+//					i--;
+//					currentTokenType = Token.NULL;
+//
+//				} // End of switch (c).
+//
+//				break;
 
 			case Token.COMMENT_EOL:
 				i = end - 1;
