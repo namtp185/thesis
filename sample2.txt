@@ -1,0 +1,21 @@
+UseCase : Get paid for car accident
+BriefDescription : The Claimant get paid from system of insurance company.
+Actors : Claimant
+Precondition : none.
+Postcondition : Claimant and MyInsCo agree on amount to be paid, claimant gets paid that.
+Trigger : Claimant submits a claim.
+SpecialRequirement : There is no special requirement.
+BasicFlow :
+Step 1: Claimant submits claim with substantiating data.
+Step 2: The system verifies substantiating data. If submitted data is incomplete then goes to step 2a1.
+Step 3: The system verifies claimant owns a valid policy. If claimant does not own a valid policy then goes to step 3a1. 
+Step 4: The system assigns agent to examine case.
+Step 5: The system verifies all details are within policy guidelines. If accident violates policy guidelines then goes to step 5a1.
+Step 6: The system pays claimant and closes file.
+AlternativeFlows :
+Flow 2a: Submitted data is incomplete
+Step 1: The system requests missing information. Then going step 2.
+Flow 3a: Claimant does not own a valid policy
+Step 1: The system declines claim and terminates proceedings.
+Flow 5a: Accident violates policy guidelines
+Step 1: The system declines claim and terminates proceedings.

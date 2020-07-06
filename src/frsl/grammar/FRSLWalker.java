@@ -180,7 +180,7 @@ public class FRSLWalker extends FRSLBaseListener {
 					}
 				}
 				int type = SentenceTypeChecker.check(fs.getDescription(), metaModel);
-//				System.out.println("Type " + type + " : " + fs.getDescription());
+				System.out.println("Type " + type + " : " + fs.getDescription());
 				switch (type) {
 				case 0:
 					// normal
@@ -200,7 +200,7 @@ public class FRSLWalker extends FRSLBaseListener {
 					if (description.contains("else")) {
 						// if condition then.... else...
 						Pattern r = Pattern.compile(
-								"(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>else).*step *([A-z0-9]+).*(?>\\.)");
+								"(?<= if )(.*)(?= then )(?> then ).*step *([A-z0-9]+).*(?>else).*step *([A-z0-9]+).*(?>\\.)");
 						Matcher m = r.matcher(description);
 						if (m.find()) {
 							String condition = m.group(1).trim();
@@ -228,7 +228,7 @@ public class FRSLWalker extends FRSLBaseListener {
 						}
 					} else {
 						// if condition then.... (default else is next step of flow)
-						Pattern r = Pattern.compile("(?<=if)(.*)(?=then)(?>then).*step *([A-z0-9]+).*(?>\\.)");
+						Pattern r = Pattern.compile("(?<= if )(.*)(?= then )(?> then ).*step *([A-z0-9]+).*(?>\\.)");
 						Matcher m = r.matcher(description);
 						if (m.find()) {
 							String condition = m.group(1).trim();
@@ -354,6 +354,7 @@ public class FRSLWalker extends FRSLBaseListener {
 			}
 			joinNode.setId(id);
 		}
+		System.out.println(metaModel);
 	};
 
 	private static boolean isExistOnListFlowsOfEachJoinNode(List<List<FlowEdge>> listFlowsOfEachJoinNode,
