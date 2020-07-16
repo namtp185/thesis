@@ -144,9 +144,8 @@
 {name: "ForkNodeStep_9", width: 50, height: 50, offsetX: 580, offsetY: 1580,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.ForkNode,ports: actionPorts,},
 {name: "Step_10", width: 160, height: 60, offsetX: 480, offsetY: 1680,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.Action,labels: [{ "text": "The system shows a  complete message"}],ports: actionPorts,},
 {name: "Step_11", width: 160, height: 60, offsetX: 690, offsetY: 1680,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.Action,labels: [{ "text": "The system prints the  borrowing bill"}],ports: actionPorts,},
-{name: "Step_12", width: 160, height: 60, offsetX: 900, offsetY: 1680,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.Action,labels: [{ "text": "The system prints the  borrowing bill"}],ports: actionPorts,},
 {name: "Step_E12", width: 160, height: 70, offsetX: 250, offsetY: 600,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.Action,labels: [{ "text": "The system executes the  extending use case  Search book"}],ports: actionPorts,},
-{name: "JoinNode_between_Step_11Step_12Step_10", width: 50, height: 50, offsetX: 480, offsetY: 1790,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.JoinNode,ports: actionPorts,},
+{name: "JoinNode_between_Step_11Step_10", width: 50, height: 50, offsetX: 480, offsetY: 1790,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.JoinNode,ports: actionPorts,},
 {name: "FinalNode", width: 50, height: 50, offsetX: 370, offsetY: 1580,type: "umlactivity",shape: ej.datavisualization.Diagram.UMLActivityShapes.FinalNode,},
 ];
 
@@ -170,16 +169,14 @@
 {name: "BasicFlowEdge_Step_9_to_ForkNodeStep_9", sourceNode: "Step_9", targetNode: "ForkNodeStep_9", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
 {name: "BasicFlowEdge_ForkNodeStep_9_to_Step_10", sourceNode: "ForkNodeStep_9", targetNode: "Step_10", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
 {name: "BasicFlowEdge_ForkNodeStep_9_to_Step_11", sourceNode: "ForkNodeStep_9", targetNode: "Step_11", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
-{name: "BasicFlowEdge_ForkNodeStep_9_to_Step_12", sourceNode: "ForkNodeStep_9", targetNode: "Step_12", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
 {name: "AlternateFlowEdge_Step_6a1_to_Step_5", sourceNode: "Step_6a1", targetNode: "Step_5", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
 {name: "AlternateFlowEdge_Step_E11_to_Step_E12", sourceNode: "Step_E11", targetNode: "Step_E12", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
 {name: "AlternateFlowEdge_Step_E12_to_Step_3", sourceNode: "Step_E12", targetNode: "Step_3", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
 {name: "AlternateFlowEdge_Step_4a1_to_Step_3", sourceNode: "Step_4a1", targetNode: "Step_3", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
-{name: "BasicFlowEdge_Step_10_to_FinalNode", sourceNode: "Step_10", targetNode: "JoinNode_between_Step_11Step_12Step_10", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
-{name: "BasicFlowEdge_Step_11_to_FinalNode", sourceNode: "Step_11", targetNode: "JoinNode_between_Step_11Step_12Step_10", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
-{name: "BasicFlowEdge_Step_12_to_FinalNode", sourceNode: "Step_12", targetNode: "JoinNode_between_Step_11Step_12Step_10", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
+{name: "BasicFlowEdge_Step_10_to_FinalNode", sourceNode: "Step_10", targetNode: "JoinNode_between_Step_11Step_10", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
+{name: "BasicFlowEdge_Step_11_to_FinalNode", sourceNode: "Step_11", targetNode: "JoinNode_between_Step_11Step_10", segments: [{ "type": "orthogonal" }], sourcePort: "out",targetPort: "in",},
 {name: "AlternateFlowEdge_Step_8a1_to_FinalNode", sourceNode: "Step_8a1", targetNode: "FinalNode", segments: [{ "type": "orthogonal" }], sourcePort: "out",},
-{name: "BasicFlowEdge_null_to_FinalNode", sourceNode: "JoinNode_between_Step_11Step_12Step_10", targetNode: "FinalNode", segments: [{ "type": "orthogonal" }], sourcePort: "out",},
+{name: "BasicFlowEdge_null_to_FinalNode", sourceNode: "JoinNode_between_Step_11Step_10", targetNode: "FinalNode", segments: [{ "type": "orthogonal" }], sourcePort: "out",},
 ];
 
         $(function () {
