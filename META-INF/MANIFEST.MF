@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Plugin-Name: newplugin
+Plugin-Version: 1.0
+Main-Class: frsl.newplugin.Main
+Plugin-Publisher: UET-namtp
