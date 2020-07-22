@@ -11,8 +11,8 @@
 	<classpathentry kind="lib" path="lib/rsyntaxtextarea-3.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/autocomplete-3.0.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/frsl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/plantuml-1.2020.15"/>
 	<classpathentry kind="lib" path="lib/guava-29.0-jre.jar"/>
 	<classpathentry kind="lib" path="lib/plantuml.1.2020.15.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/plantuml"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
