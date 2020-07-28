@@ -3,8 +3,6 @@
  */
 package frsl.sequence_diagram.actions;
 
-import java.io.IOException;
-
 import javax.swing.JOptionPane;
 
 import com.google.common.base.Optional;
@@ -13,7 +11,7 @@ import frsl.metamodel.UseCase;
 import frsl.runtime.itf.IPluginAction;
 import frsl.runtime.itf.IPluginActionDelegate;
 import frsl.util.IOUtil;
-import net.sourceforge.plantuml.Run;
+//import net.sourceforge.plantuml.Run;
 
 /**
  * @author ntp28459hteam
@@ -25,6 +23,7 @@ public class GenerateArtifactAction implements IPluginActionDelegate {
 	
 	@Override
 	public void performAction(IPluginAction pluginAction) {
+		String debugFilePath = System.getProperty("user.dir") + "/debug.log";
 		setResultFileName();
 		UseCase metaModel = pluginAction.getParent().getMetaModel();
 		if (metaModel == null) {
@@ -32,6 +31,7 @@ public class GenerateArtifactAction implements IPluginActionDelegate {
 					"Generate activity diagram", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+		IOUtil.writeFile(debugFilePath, metaModel.getFlowEdges().get(0).toString());
 		String path = System.getProperty("user.dir") + "/output_artifacts/" + resultFileName;
 		
 		String usecaseName = metaModel.getDescriptionInfo().getUseCaseName(); 
@@ -78,13 +78,13 @@ class GenerateGraphicDiagram implements Runnable {
 
 	@Override
 	public void run() {
-		String[] templateFilePath = new String[1]; 
-		templateFilePath[0] = new String(System.getProperty("user.dir") + "/output_artifacts/" + "sequence.txt");
-		try {
-			Run.main(templateFilePath);
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+//		String[] templateFilePath = new String[1]; 
+//		templateFilePath[0] = new String(System.getProperty("user.dir") + "/output_artifacts/" + "sequence.txt");
+//		try {
+//			Run.main(templateFilePath);
+//		} catch (IOException | InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}		
 	}
 }

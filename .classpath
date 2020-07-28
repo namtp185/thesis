@@ -13,6 +13,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/frsl"/>
 	<classpathentry kind="lib" path="lib/guava-29.0-jre.jar"/>
 	<classpathentry kind="lib" path="lib/plantuml.1.2020.15.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/plantuml"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

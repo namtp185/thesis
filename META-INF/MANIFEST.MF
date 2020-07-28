@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Plugin-Name: newplugin
 Plugin-Version: 1.0
-Main-Class: frsl.newplugin.Main
+Main-Class: frsl.sequence_diagram.Main
 Plugin-Publisher: UET-namtp

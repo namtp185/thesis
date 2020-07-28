@@ -4,12 +4,12 @@
 	<actions>
 		<action label="Invoke my new plugin"
 			icon="resource/icon/generate.png"
-			class="frsl.newplugin.actions.GenerateArtifactAction"
+			class="frsl.sequence_diagram.actions.GenerateArtifactAction"
 			tooltip="newplugin action from FRSL model"
 			menu="newplugin action"
 			menuitem="Generate artifact"
 			toolbaritem="Generate artifact"
-			id="frsl.newplugin.actions.GenerateArtifactAction">
+			id="frsl.sequence_diagram.actions.GenerateArtifactAction">
 		</action>
 	</actions>
 </plugin>
