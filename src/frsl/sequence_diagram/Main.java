@@ -14,7 +14,7 @@ public class Main implements IPlugin {
 
 	@Override
 	public String getName() {
-		return "newplugin";
+		return "sequencediagram";
 	}
 
 	@Override

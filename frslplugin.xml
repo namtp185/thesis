@@ -2,14 +2,23 @@
 <?use version="4.2.0"?>
 <plugin name="newplugin" version="1.0">
 	<actions>
-		<action label="Invoke my new plugin"
+		<action label="Generate sequence diagram"
 			icon="resource/icon/generate.png"
-			class="frsl.sequence_diagram.actions.GenerateArtifactAction"
+			class="frsl.sequence_diagram.actions.GenerateSequenceDiagramAction"
 			tooltip="newplugin action from FRSL model"
 			menu="newplugin action"
-			menuitem="Generate artifact"
-			toolbaritem="Generate artifact"
-			id="frsl.sequence_diagram.actions.GenerateArtifactAction">
+			menuitem="Generate sequence diagram"
+			toolbaritem="Generate sequence diagram"
+			id="frsl.sequence_diagram.actions.GenerateSequenceDiagramAction">
 		</action>
+		<action label="Generate activity diagram 2.0"
+            icon="resource/icon/generate.png"
+            class="frsl.sequence_diagram.actions.GenerateActivityDiagramAction"
+            tooltip="newplugin action from FRSL model"
+            menu="newplugin action"
+            menuitem="Generate activity diagram 2.0"
+            toolbaritem="Generate activity diagram 2.0"
+            id="frsl.sequence_diagram.actions.GenerateActivityDiagramAction">
+        </action>
 	</actions>
 </plugin>
