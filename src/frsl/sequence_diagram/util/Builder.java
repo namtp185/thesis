@@ -6,6 +6,7 @@ public class Builder {
 	public Builder() {
 		sb = new StringBuilder();
 		sb.append("@startuml\n");
+		sb.append("start\n");
 	}
 	
 	public void append(String str) {
@@ -13,6 +14,7 @@ public class Builder {
 	}
 	
 	public String render() {
+		sb.append("end\n");
 		sb.append("@enduml\n");
 		return sb.toString();
 	}

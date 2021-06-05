@@ -2,15 +2,16 @@
 <?use version="4.2.0"?>
 <plugin name="newplugin" version="1.0">
 	<actions>
-		<action label="Generate sequence diagram"
+		<action label="Generate behavioral diagram"
 			icon="resource/icon/generate.png"
-			class="frsl.sequence_diagram.actions.GenerateSequenceDiagramAction"
-			tooltip="newplugin action from FRSL model"
+			class="frsl.sequence_diagram.actions.GenerateBehavioralDiagramAction"
+			tooltip="Create behavioral context menu"
 			menu="newplugin action"
-			menuitem="Generate sequence diagram"
-			toolbaritem="Generate sequence diagram"
-			id="frsl.sequence_diagram.actions.GenerateSequenceDiagramAction">
+			menuitem="Generate behavioral diagram"
+			toolbaritem="Generate behavioral diagram"
+			id="frsl.sequence_diagram.actions.GenerateBehavioralDiagramAction">
 		</action>
+		<!-- 
 		<action label="Generate activity diagram 2.0"
             icon="resource/icon/generate.png"
             class="frsl.sequence_diagram.actions.GenerateActivityDiagramAction"
@@ -20,5 +21,6 @@
             toolbaritem="Generate activity diagram 2.0"
             id="frsl.sequence_diagram.actions.GenerateActivityDiagramAction">
         </action>
+         -->
 	</actions>
 </plugin>

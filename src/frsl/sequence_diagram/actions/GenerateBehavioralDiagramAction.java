@@ -18,7 +18,7 @@ import frsl.util.IOUtil;
  * @author ntp28459hteam
  *
  */
-public class GenerateSequenceDiagramAction implements IPluginActionDelegate {
+public class GenerateBehavioralDiagramAction implements IPluginActionDelegate {
 
 	public static String resultFileName;
 	
@@ -33,12 +33,12 @@ public class GenerateSequenceDiagramAction implements IPluginActionDelegate {
 		UseCase metaModel = pluginAction.getParent().getMetaModel();
 		if (metaModel == null) {
 			JOptionPane.showMessageDialog(null, "You need to successfully compile FRSL first!",
-					"Generate activity diagram", JOptionPane.INFORMATION_MESSAGE);
+					"Generate behavioral diagram", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 		if(firstTimeClick) {
 			secondaryWorkspace = new BehavioralDiagramPluginEditor(metaModel);
-			pluginAction.getParent().getContentPane().add("Sequence Diagram Editor", secondaryWorkspace);
+			pluginAction.getParent().getContentPane().add("Behavioral Diagram Editor", secondaryWorkspace);
 			firstTimeClick = false;
 		}
 		

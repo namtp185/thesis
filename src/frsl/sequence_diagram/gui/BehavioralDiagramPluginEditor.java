@@ -41,7 +41,7 @@ public class BehavioralDiagramPluginEditor extends JPanel {
 		Model model = new Model(usecase);
 		
 		Extractor extractor = new Extractor(usecase, model);
-		extractor.extractAdditionalInfo();
+		String diagramSpec = extractor.extractAdditionalInfo();
 //		extractor.generateRenderInfo();
 		
 		
@@ -76,6 +76,7 @@ public class BehavioralDiagramPluginEditor extends JPanel {
 		mainSplitPane.setDividerLocation(550);
 		add(mainSplitPane);
 		
+		activityEditor.setText(diagramSpec);
 		
 		for(DocumentRange dRange: textArea.getMarkAllHighlightRanges()) {
 			System.out.println(String.format("%d %d", dRange.getStartOffset(), dRange.getEndOffset()));

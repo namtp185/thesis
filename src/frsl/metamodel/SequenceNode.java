@@ -40,6 +40,11 @@ public class SequenceNode extends Node {
 	}
 	
 	public String toString() {
-		return String.format("%s\n|%s|\n:%s;\n", this.getName(), this.actor.getName(), this.description);
+		if(this.actor != null) {
+			return String.format("|%s|\n:%s;\n", this.actor.getName(), this.description);
+		} else {
+			return String.format(":%s;\n", this.description);
+		}
+		
 	}
 }

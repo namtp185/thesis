@@ -36,7 +36,7 @@ public class Extractor {
 		this.model = model;
 	}
 
-	public void extractAdditionalInfo() {
+	public String extractAdditionalInfo() {
 		List<Message> messages = new ArrayList<>();
 
 		for (USLNode node : usecase.getUslNodes()) {
@@ -196,9 +196,9 @@ public class Extractor {
 						} else if(start == end) {
 							currentNode.addChild(new Sentence("repeat"));
 							currentNode.addChild(basicFlow);
-							currentNode.addChild(new InlineString("backward: "));
+							currentNode.addChild(new InlineString("backward"));
 							currentNode.addChild(alternateFlow);
-							currentNode.addChild(new ConditionNode( // repeat while
+							currentNode.addChild(new ConditionNode(
 									conditionStep.getName(),
 									String.format("repeat while (%s) is(false) not (true)",
 											conditionStep.getDescription())));
@@ -207,8 +207,11 @@ public class Extractor {
 						} else {
 							currentNode.addChild(new Sentence("repeat"));
 							currentNode.addChild(basicFlow);
-							currentNode.addChild(new InlineString("backward: "));
+							currentNode.addChild(new InlineString("backward"));
 							currentNode.addChild(alternateFlow);
+//							for(Node node: alternateFlow) {
+//								
+//							}
 							currentNode = alternateFlow;
 							
 							currentNode.addChild(new ConditionNode( // repeat while
@@ -279,7 +282,9 @@ public class Extractor {
 
 		treeRoot.visitChild(builder);
 		System.out.println("render result:\n");
-		System.out.println(builder.render());
+		String result = builder.render();
+		System.out.println(result);
+		return result;
 
 		// for(Message message: messages) {
 		// System.out.println(message.toString());

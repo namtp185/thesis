@@ -64,6 +64,10 @@ public class ActivityPlantUMLEditor extends PlantUMLEditor {
 		});
 		return btn;
 	}
+	
+	public void setText(String text) {
+		textArea.setText(text);
+	}
 
 	protected void genImage() {
 		try {
