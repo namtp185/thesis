@@ -19,21 +19,8 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import frsl.constant.Constant;
-import frsl.metamodel.Action;
-import frsl.metamodel.Actor;
-import frsl.metamodel.ActorAction;
-import frsl.metamodel.ConditionNode;
-import frsl.metamodel.ConditionStep;
-import frsl.metamodel.Entity;
-import frsl.metamodel.FlowStep;
-import frsl.metamodel.Message;
-import frsl.metamodel.Node;
-import frsl.metamodel.SequenceMessage;
-import frsl.metamodel.SequenceNode;
-import frsl.metamodel.SequenceStep;
-import frsl.metamodel.SystemAction;
-import frsl.metamodel.USLNode;
 import frsl.metamodel.UseCase;
+import frsl.metamodel.UseCaseV2;
 
 public class ActivityPlantUMLEditor extends PlantUMLEditor {
 	private static final long serialVersionUID = 1L;	
@@ -77,7 +64,7 @@ public class ActivityPlantUMLEditor extends PlantUMLEditor {
 		}
 	}
 
-	public ActivityPlantUMLEditor(String templateFile, UseCase usecase) {
+	public ActivityPlantUMLEditor(String templateFile, UseCaseV2 usecase) {
 		this.templateFile = templateFile;
 		this.usecase = usecase;
 		setLayout(new BorderLayout());

@@ -14,12 +14,12 @@ public class Model implements ModelObservable {
 	private List<Message> messages;
 	private List<Node> nodes;
 	// For getting original information from sourceModel
-	private UseCase usecase;
+	private UseCaseV2 usecase;
 	
 	// get corresponding node from step
 	private Map<String, Node> nodesMap;
 	
-	public Model(UseCase usecase) {
+	public Model(UseCaseV2 usecase) {
 		this.usecase = usecase;
 		observers = new ArrayList<>();
 		entities = new HashMap<>();
@@ -126,7 +126,4 @@ public class Model implements ModelObservable {
 		return this.nodes;
 	}
 	
-	public List<USLNode> getUslNodes() {
-		return usecase.getUslNodes();
-	}
 }

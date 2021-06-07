@@ -11,16 +11,5 @@
 			toolbaritem="Generate behavioral diagram"
 			id="frsl.sequence_diagram.actions.GenerateBehavioralDiagramAction">
 		</action>
-		<!-- 
-		<action label="Generate activity diagram 2.0"
-            icon="resource/icon/generate.png"
-            class="frsl.sequence_diagram.actions.GenerateActivityDiagramAction"
-            tooltip="newplugin action from FRSL model"
-            menu="newplugin action"
-            menuitem="Generate activity diagram 2.0"
-            toolbaritem="Generate activity diagram 2.0"
-            id="frsl.sequence_diagram.actions.GenerateActivityDiagramAction">
-        </action>
-         -->
 	</actions>
 </plugin>

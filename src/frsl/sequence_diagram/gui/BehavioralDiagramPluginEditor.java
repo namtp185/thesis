@@ -17,19 +17,20 @@ import frsl.constant.Constant;
 import frsl.gui.FRSLSpecificationTextEditor;
 import frsl.metamodel.Model;
 import frsl.metamodel.UseCase;
+import frsl.metamodel.UseCaseV2;
 import frsl.util.IOUtil;
 
 public class BehavioralDiagramPluginEditor extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private UseCase usecase;
+	private UseCaseV2 usecase;
 	private CustomRSyntaxArea textArea;
 	private JToolBar toolBar;
 	private JSplitPane mainSplitPane;
 	private JSplitPane leftSplitPane;
 	private JSplitPane rightSplitPane;
 
-	public BehavioralDiagramPluginEditor(UseCase usecase) {
+	public BehavioralDiagramPluginEditor(UseCaseV2 usecase) {
 		this.usecase = usecase;
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(1100, 500));
@@ -40,9 +41,11 @@ public class BehavioralDiagramPluginEditor extends JPanel {
 		
 		Model model = new Model(usecase);
 		
-		Extractor extractor = new Extractor(usecase, model);
-		String diagramSpec = extractor.extractAdditionalInfo();
-//		extractor.generateRenderInfo();
+//		Extractor extractor = new DefaultExtractor();
+//		String diagramSpec = extractor.extractAdditionalInfo(usecase, model);
+		
+		ExtractorV2 extractor = new DefaultExtractorV2();
+		String diagramSpec = extractor.extractAdditionalInfo(usecase, model);
 		
 		
 		
@@ -62,7 +65,8 @@ public class BehavioralDiagramPluginEditor extends JPanel {
 		DomainViewer domainViewer = new DomainViewer();
 		model.registerObserver(domainViewer);
 		model.registerObserver(sequenceEditor);
-		model.registerObserver(activityEditor);
+		
+//		model.registerObserver(activityEditor);
 		
 //		activityEditor.update(model);
 		

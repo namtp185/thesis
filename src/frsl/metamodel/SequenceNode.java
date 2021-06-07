@@ -12,6 +12,10 @@ public class SequenceNode extends Node {
 		this.stepName = stepName;
 	}
 	
+	public SequenceNode(String description) {
+		this.description = description;
+	}
+	
 	public void setActor(Actor actor) {
 		this.actor = actor;
 	}
@@ -41,7 +45,8 @@ public class SequenceNode extends Node {
 	
 	public String toString() {
 		if(this.actor != null) {
-			return String.format("|%s|\n:%s;\n", this.actor.getName(), this.description);
+			return String.format(":%s;\n", this.description);
+//			return String.format("|%s|\n:%s;\n", this.actor.getName(), this.description);
 		} else {
 			return String.format(":%s;\n", this.description);
 		}
