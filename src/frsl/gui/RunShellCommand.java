@@ -1,4 +1,4 @@
-package frsl.sequence_diagram.gui;
+package frsl.gui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,10 +29,10 @@ public class RunShellCommand {
 	}
 
 	public static void runProcess(String command) throws IOException, InterruptedException {
-		Process pro = Runtime.getRuntime().exec(command);
-		printLines(command + " stdout:", pro.getInputStream());
-		printLines(command + " stderr:", pro.getErrorStream());
-		pro.waitFor();
-		System.out.println(command + " exitValue() " + pro.exitValue());
+		Process process = Runtime.getRuntime().exec(command);
+//		printLines(command + " stdout:", pro.getInputStream());
+//		printLines(command + " stderr:", pro.getErrorStream());
+		process.waitFor();
+		System.out.println(command + " exitValue() " + process.exitValue());
 	}
 }

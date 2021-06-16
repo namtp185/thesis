@@ -1,4 +1,4 @@
-package frsl.sequence_diagram.gui;
+package frsl.extractor;
 
 import frsl.metamodel.Actor;
 import frsl.metamodel.ActorAction;

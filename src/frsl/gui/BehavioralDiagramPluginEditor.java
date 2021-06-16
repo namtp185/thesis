@@ -1,4 +1,4 @@
-package frsl.sequence_diagram.gui;
+package frsl.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,6 +14,8 @@ import org.fife.ui.rsyntaxtextarea.DocumentRange;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import frsl.constant.Constant;
+import frsl.extractor.DefaultExtractorV2;
+import frsl.extractor.ExtractorV2;
 import frsl.gui.FRSLSpecificationTextEditor;
 import frsl.metamodel.Model;
 import frsl.metamodel.UseCase;

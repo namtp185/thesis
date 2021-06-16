@@ -1,4 +1,4 @@
-package frsl.sequence_diagram.gui;
+package frsl.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;

@@ -1,4 +1,4 @@
-package frsl.sequence_diagram.gui;
+package frsl.extractor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

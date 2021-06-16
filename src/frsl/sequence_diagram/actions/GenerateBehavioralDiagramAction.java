@@ -7,11 +7,11 @@ import javax.swing.JOptionPane;
 
 import com.google.common.base.Optional;
 
+import frsl.gui.BehavioralDiagramPluginEditor;
 import frsl.metamodel.UseCase;
 import frsl.metamodel.UseCaseV2;
 import frsl.runtime.itf.IPluginAction;
 import frsl.runtime.itf.IPluginActionDelegate;
-import frsl.sequence_diagram.gui.BehavioralDiagramPluginEditor;
 import frsl.util.IOUtil;
 //import net.sourceforge.plantuml.Run;
 

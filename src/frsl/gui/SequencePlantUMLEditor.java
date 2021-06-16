@@ -1,5 +1,5 @@
 
-package frsl.sequence_diagram.gui;
+package frsl.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -19,13 +19,14 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import frsl.constant.Constant;
-import frsl.metamodel.UseCase;
-import frsl.metamodel.UseCaseV2;
+import frsl.metamodel.Actor;
+import frsl.metamodel.Entity;
+import frsl.metamodel.Message;
+import frsl.metamodel.SequenceMessage;
 
-public class ActivityPlantUMLEditor extends PlantUMLEditor {
+public class SequencePlantUMLEditor extends PlantUMLEditor {
 	private static final long serialVersionUID = 1L;	
 	
-
 	private StringBuilder sb;
 	private RSyntaxTextArea textArea;
 	private RTextScrollPane sp;
@@ -51,10 +52,6 @@ public class ActivityPlantUMLEditor extends PlantUMLEditor {
 		});
 		return btn;
 	}
-	
-	public void setText(String text) {
-		textArea.setText(text);
-	}
 
 	protected void genImage() {
 		try {
@@ -64,9 +61,8 @@ public class ActivityPlantUMLEditor extends PlantUMLEditor {
 		}
 	}
 
-	public ActivityPlantUMLEditor(String templateFile, UseCaseV2 usecase) {
+	public SequencePlantUMLEditor(String templateFile) {
 		this.templateFile = templateFile;
-		this.usecase = usecase;
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(300, 200));
 		textArea = new RSyntaxTextArea();
@@ -84,68 +80,18 @@ public class ActivityPlantUMLEditor extends PlantUMLEditor {
 	protected void render() {
 		sb.setLength(0);
 		sb.append("@startuml\n");
-//		for (Node node : model.getNodes()) {
-//			if(node instanceof SequenceNode) {
-//				SequenceNode sqNode = (SequenceNode)node;
-//				sb.append(sqNode.toString());
-//			}
-//			if(node instanceof ConditionNode) {
-//				ConditionNode cdNode = (ConditionNode)node;
-//				sb.append(node.toString());
-//			}
-//		}
-		
-		
-//		for (USLNode node : usecase.getUslNodes()) {
-//			if(node instanceof FlowStep) {
-//				
-//			}
-//			
-//			if(node instanceof ConditionStep) {
-//				
-//			}
-//			
-//			if(node instanceof SequenceStep) {
-//				
-//			}
-//		}
-		
+		for (Entity e : model.getEntities().values()) {
+			sb.append(e.toString());
+		}
+		for (Actor a : model.getActors().values()) {
+			sb.append(a.toString());
+		}
+		for (Message message : model.getMessages()) {
+			System.out.println(message);
+		}
 		sb.append("@enduml\n");
 		textArea.setText(sb.toString());
 	}
-	
-
-//	public void generateRenderInfo() {
-//		// Context information here
-//		// A state machine: state1: actor enter data
-//		// state2: system validate data
-//		// state3: system show error
-//		// -> create a loop
-//		
-//		for(Node node: model.getNodes()) {
-//			if(node instanceof SequenceNode) {
-//				
-//			}
-//			System.out.println(node);
-//			Action a = node.getAction();
-//			if(a instanceof SystemAction) {
-//				SystemAction sa = (SystemAction)a;
-//				if(sa.isShowError()) {
-//					
-//				}
-//			}
-//			if(a instanceof ActorAction) {
-//				ActorAction aa = (ActorAction)a;
-//				
-//			}
-//		}
-//		
-//		// Context information here
-//		// 
-//		for(Message message: model.getMessages()) {
-//			
-//		}
-//	}
 
 	
 

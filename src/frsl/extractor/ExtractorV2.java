@@ -1,4 +1,4 @@
-package frsl.sequence_diagram.gui;
+package frsl.extractor;
 
 import frsl.metamodel.Model;
 import frsl.metamodel.UseCaseV2;

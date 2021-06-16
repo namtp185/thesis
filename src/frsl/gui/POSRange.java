@@ -1,4 +1,4 @@
-package frsl.sequence_diagram.gui;
+package frsl.gui;
 
 public class POSRange {
 	private int startIndex = -1;
